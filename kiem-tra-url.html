@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Công cụ kiểm tra và nhận diện các dấu hiệu đáng ngờ trong đường dẫn URL."
+    />
+    <title>Kiểm tra URL | CyberSafe</title>
+    <link rel="stylesheet" href="css/url.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand">
+          <span class="brand-logo">CS</span>
+          <span class="brand-text">
+            <strong>CyberSafe</strong>
+            <small>INFORMATION SECURITY</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
+          <a
+            href="kiem-tra-url.html"
+            class="active"
+            data-vi="Kiểm tra URL"
+            data-en="URL Checker"
+            >Kiểm tra URL</a
+          >
+          <a href="kiem-tra-mat-khau.html" data-vi="Mật khẩu" data-en="Password"
+            >Mật khẩu</a
+          >
+          <a
+            href="tinh-huong-lua-dao.html"
+            data-vi="Tình huống"
+            data-en="Scenarios"
+            >Tình huống</a
+          >
+          <a href="thu-vien-kien-thuc.html" data-vi="Thư viện" data-en="Library"
+            >Thư viện</a
+          >
+        </nav>
+
+        <div class="nav-actions">
+          <button class="lang-switch" id="langSwitch" type="button">
+            <span id="langLabel">VIE</span>
+          </button>
+
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            type="button"
+            aria-label="Mở menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="eyebrow">
+              <span class="status-dot"></span>
+              CYBERSAFE SECURITY TOOLS
+            </div>
+
+            <h1>
+              Kiểm tra đường dẫn
+              <span>URL đáng ngờ</span>
+            </h1>
+
+            <p
+              class="hero-description"
+              data-vi="Phân tích những dấu hiệu bất thường trong đường dẫn để nhận biết nguy cơ lừa đảo, giả mạo website và các liên kết không an toàn."
+              data-en="Analyze unusual URL characteristics to identify possible phishing, fake websites and suspicious links."
+            >
+              Phân tích những dấu hiệu bất thường trong đường dẫn để nhận biết
+              nguy cơ lừa đảo, giả mạo website và các liên kết không an toàn.
+            </p>
+
+            <div class="hero-points">
+              <div>
+                <span class="point-icon">✓</span>
+                <span data-vi="Phân tích trực tiếp" data-en="Instant analysis"
+                  >Phân tích trực tiếp</span
+                >
+              </div>
+              <div>
+                <span class="point-icon">✓</span>
+                <span data-vi="Không cần đăng nhập" data-en="No login required"
+                  >Không cần đăng nhập</span
+                >
+              </div>
+              <div>
+                <span class="point-icon">✓</span>
+                <span
+                  data-vi="Không gửi URL lên máy chủ"
+                  data-en="URL stays in your browser"
+                  >Không gửi URL lên máy chủ</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="visual-card">
+              <div class="visual-card-top">
+                <div class="window-dots"><i></i><i></i><i></i></div>
+                <span>CYBERSAFE SCANNER</span>
+                <span class="visual-status">● ONLINE</span>
+              </div>
+
+              <div class="visual-shield">
+                <div class="shield-circle">
+                  <svg viewBox="0 0 100 100" aria-hidden="true">
+                    <path
+                      d="M50 9 L82 22 V46 C82 68 68 84 50 92 C32 84 18 68 18 46 V22 Z"
+                    ></path>
+                    <path d="M34 50 L45 61 L67 38"></path>
+                  </svg>
+                </div>
+                <strong>URL PROTECTION</strong>
+                <span
+                  data-vi="Kiểm tra dấu hiệu rủi ro"
+                  data-en="Suspicious link detection"
+                  >Kiểm tra dấu hiệu rủi ro</span
+                >
+              </div>
+
+              <div class="visual-info">
+                <div>
+                  <span>URL ANALYSIS</span>
+                  <strong>ACTIVE</strong>
+                </div>
+                <div>
+                  <span>SECURITY</span>
+                  <strong>CHECK</strong>
+                </div>
+                <div>
+                  <span>PRIVACY</span>
+                  <strong>LOCAL</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="visual-caption">
+              <span class="caption-icon">✓</span>
+              <span
+                data-vi="Kiểm tra trước khi truy cập"
+                data-en="Check before you click"
+                >Kiểm tra trước khi truy cập</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scanner-section" id="url-tool">
+        <div class="container">
+          <div class="section-heading">
+            <span class="section-label">URL SECURITY CHECK</span>
+            <h2 data-vi="Phân tích đường dẫn URL" data-en="Analyze a URL">
+              Phân tích đường dẫn URL
+            </h2>
+            <p
+              data-vi="Nhập đường dẫn bạn muốn kiểm tra. Hệ thống sẽ phân tích các đặc điểm có thể liên quan đến rủi ro bảo mật."
+              data-en="Enter the URL you want to check. The tool will analyze characteristics that may indicate security risks."
+            >
+              Nhập đường dẫn bạn muốn kiểm tra. Hệ thống sẽ phân tích các đặc
+              điểm có thể liên quan đến rủi ro bảo mật.
+            </p>
+          </div>
+
+          <div class="scanner-grid">
+            <section class="input-card">
+              <div class="card-heading">
+                <div class="card-icon">⌕</div>
+                <div>
+                  <h3
+                    data-vi="Nhập URL cần kiểm tra"
+                    data-en="Enter a URL to check"
+                  >
+                    Nhập URL cần kiểm tra
+                  </h3>
+                  <p
+                    data-vi="Dán đường dẫn vào ô bên dưới"
+                    data-en="Paste a link into the field below"
+                  >
+                    Dán đường dẫn vào ô bên dưới
+                  </p>
+                </div>
+              </div>
+
+              <form id="urlForm" novalidate>
+                <label
+                  for="urlInput"
+                  data-vi="ĐƯỜNG DẪN WEBSITE"
+                  data-en="WEBSITE ADDRESS"
+                  >ĐƯỜNG DẪN WEBSITE</label
+                >
+
+                <div class="input-wrap" id="urlInputShell">
+                  <span class="input-symbol">↗</span>
+                  <input
+                    type="text"
+                    id="urlInput"
+                    placeholder="https://example.com"
+                    autocomplete="off"
+                    spellcheck="false"
+                    data-placeholder-vi="https://example.com"
+                    data-placeholder-en="https://example.com"
+                  />
+                </div>
+
+                <p
+                  class="input-hint"
+                  id="urlInputHint"
+                  data-vi="Hỗ trợ đường dẫn bắt đầu bằng http:// hoặc https://."
+                  data-en="Supports links starting with http:// or https://."
+                >
+                  Hỗ trợ đường dẫn bắt đầu bằng http:// hoặc https://.
+                </p>
+
+                <div class="sample-area">
+                  <span
+                    class="sample-title"
+                    data-vi="THỬ VỚI URL MẪU"
+                    data-en="TRY SAMPLE URLS"
+                    >THỬ VỚI URL MẪU</span
+                  >
+
+                  <div class="sample-list">
+                    <button
+                      type="button"
+                      class="sample-btn"
+                      data-sample="https://www.example.com/"
+                    >
+                      <span class="sample-dot safe-dot"></span>
+                      <span data-vi="URL mẫu an toàn" data-en="Safe sample"
+                        >URL mẫu an toàn</span
+                      >
+                    </button>
+
+                    <button
+                      type="button"
+                      class="sample-btn"
+                      data-sample="http://login-example.invalid/verify"
+                    >
+                      <span class="sample-dot danger-dot"></span>
+                      <span
+                        data-vi="URL có dấu hiệu đáng ngờ"
+                        data-en="Suspicious sample"
+                        >URL có dấu hiệu đáng ngờ</span
+                      >
+                    </button>
+
+                    <button
+                      type="button"
+                      class="sample-btn"
+                      data-sample="https://bit.ly/example"
+                    >
+                      <span class="sample-dot warning-dot"></span>
+                      <span data-vi="URL rút gọn" data-en="Shortened URL"
+                        >URL rút gọn</span
+                      >
+                    </button>
+                  </div>
+                </div>
+
+                <div class="button-group">
+                  <button type="submit" class="analyze-btn" id="analyzeUrlBtn">
+                    <span data-vi="Phân tích URL" data-en="Analyze URL"
+                      >Phân tích URL</span
+                    >
+                    <span class="button-arrow">→</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="clear-btn"
+                    id="clearUrlBtn"
+                    data-vi="Xóa"
+                    data-en="Clear"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </form>
+
+              <div class="privacy-note">
+                <span class="privacy-icon">✓</span>
+                <p
+                  data-vi="Quyền riêng tư: Công cụ chỉ phân tích cấu trúc đường dẫn ngay trên trình duyệt. URL không được gửi đến máy chủ và website đích không được mở."
+                  data-en="Privacy: This tool analyzes the URL structure in your browser. The URL is not uploaded and the destination website is not opened."
+                >
+                  Quyền riêng tư: Công cụ chỉ phân tích cấu trúc đường dẫn ngay
+                  trên trình duyệt. URL không được gửi đến máy chủ và website
+                  đích không được mở.
+                </p>
+              </div>
+            </section>
+
+            <section class="result-card" id="resultPanel">
+              <div class="result-header">
+                <div>
+                  <span class="card-overline">ANALYSIS REPORT</span>
+                  <h3 data-vi="Kết quả phân tích" data-en="Analysis result">
+                    Kết quả phân tích
+                  </h3>
+                </div>
+                <span class="scan-status" id="scanStatus">READY</span>
+              </div>
+
+              <div class="result-summary">
+                <span
+                  class="risk-badge"
+                  id="riskBadge"
+                  data-vi="Chưa phân tích"
+                  data-en="Not analyzed"
+                  >Chưa phân tích</span
+                >
+
+                <h4
+                  id="riskTitle"
+                  data-vi="Sẵn sàng kiểm tra URL"
+                  data-en="Ready to check URL"
+                >
+                  Sẵn sàng kiểm tra URL
+                </h4>
+
+                <p
+                  id="riskDesc"
+                  data-vi="Nhập một đường dẫn ở khung bên trái và nhấn nút phân tích để xem kết quả."
+                  data-en="Enter a URL in the panel on the left and select Analyze to see the result."
+                >
+                  Nhập một đường dẫn ở khung bên trái và nhấn nút phân tích để
+                  xem kết quả.
+                </p>
+              </div>
+
+              <div class="score-box">
+                <div class="score-circle" id="scoreCircle">
+                  <div class="score-content">
+                    <strong id="riskScore">0</strong>
+                    <span>/ 100</span>
+                  </div>
+                </div>
+
+                <div class="score-description">
+                  <strong data-vi="Điểm rủi ro" data-en="Risk score"
+                    >Điểm rủi ro</strong
+                  >
+                  <p
+                    data-vi="Điểm càng cao, số lượng dấu hiệu đáng ngờ được phát hiện càng nhiều."
+                    data-en="A higher score means more suspicious indicators were detected."
+                  >
+                    Điểm càng cao, số lượng dấu hiệu đáng ngờ được phát hiện
+                    càng nhiều.
+                  </p>
+                  <div class="score-levels">
+                    <span
+                      ><i class="level-low"></i
+                      ><b data-vi="Thấp" data-en="Low">Thấp</b></span
+                    >
+                    <span
+                      ><i class="level-medium"></i
+                      ><b data-vi="Trung bình" data-en="Medium"
+                        >Trung bình</b
+                      ></span
+                    >
+                    <span
+                      ><i class="level-high"></i
+                      ><b data-vi="Cao" data-en="High">Cao</b></span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="findings-header">
+                <strong
+                  data-vi="CÁC DẤU HIỆU ĐƯỢC PHÁT HIỆN"
+                  data-en="DETECTED INDICATORS"
+                  >CÁC DẤU HIỆU ĐƯỢC PHÁT HIỆN</strong
+                >
+                <span id="findingCount">0</span>
+              </div>
+
+              <div class="analysis-list" id="analysisList">
+                <div class="empty-result">
+                  <span class="empty-icon">⌕</span>
+                  <p
+                    data-vi="Chưa có dữ liệu phân tích. Kết quả sẽ xuất hiện tại đây."
+                    data-en="No analysis data yet. Results will appear here."
+                  >
+                    Chưa có dữ liệu phân tích. Kết quả sẽ xuất hiện tại đây.
+                  </p>
+                </div>
+              </div>
+
+              <p
+                class="result-disclaimer"
+                data-vi="Lưu ý: Điểm số chỉ dựa trên các dấu hiệu kỹ thuật cơ bản, không phải kết quả xác minh độ an toàn tuyệt đối của website."
+                data-en="Note: The score is based on basic technical indicators and does not guarantee the website's safety."
+              >
+                Lưu ý: Điểm số chỉ dựa trên các dấu hiệu kỹ thuật cơ bản, không
+                phải kết quả xác minh độ an toàn tuyệt đối của website.
+              </p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="warning-section">
+        <div class="container">
+          <div class="section-heading">
+            <span class="section-label">SECURITY KNOWLEDGE</span>
+            <h2
+              data-vi="Dấu hiệu URL đáng ngờ"
+              data-en="Signs of a suspicious URL"
+            >
+              Dấu hiệu URL đáng ngờ
+            </h2>
+            <p
+              data-vi="Một số đặc điểm thường xuất hiện trong các đường dẫn giả mạo hoặc được sử dụng trong hoạt động lừa đảo."
+              data-en="Common characteristics found in fake links or links used in phishing attempts."
+            >
+              Một số đặc điểm thường xuất hiện trong các đường dẫn giả mạo hoặc
+              được sử dụng trong hoạt động lừa đảo.
+            </p>
+          </div>
+
+          <div class="warning-grid">
+            <article class="warning-card">
+              <div class="warning-icon blue-icon">⌘</div>
+              <span class="warning-number">01 / DOMAIN</span>
+              <h3 data-vi="Tên miền bất thường" data-en="Unusual domain name">
+                Tên miền bất thường
+              </h3>
+              <p
+                data-vi="Tên miền có nhiều ký tự lạ, nhiều dấu gạch ngang hoặc cố tình viết gần giống tên website chính thức."
+                data-en="Domains with unusual characters, excessive hyphens or names designed to resemble official websites."
+              >
+                Tên miền có nhiều ký tự lạ, nhiều dấu gạch ngang hoặc cố tình
+                viết gần giống tên website chính thức.
+              </p>
+            </article>
+
+            <article class="warning-card">
+              <div class="warning-icon purple-icon">◎</div>
+              <span class="warning-number">02 / SECURITY</span>
+              <h3 data-vi="Thiếu HTTPS" data-en="Missing HTTPS">Thiếu HTTPS</h3>
+              <p
+                data-vi="Đường dẫn sử dụng HTTP không mã hóa kết nối. Đây là dấu hiệu cần lưu ý, dù không tự động chứng minh website là lừa đảo."
+                data-en="HTTP does not encrypt the connection. This is a warning sign, but does not automatically mean the website is fraudulent."
+              >
+                Đường dẫn sử dụng HTTP không mã hóa kết nối. Đây là dấu hiệu cần
+                lưu ý, dù không tự động chứng minh website là lừa đảo.
+              </p>
+            </article>
+
+            <article class="warning-card">
+              <div class="warning-icon green-icon">↗</div>
+              <span class="warning-number">03 / REDIRECT</span>
+              <h3 data-vi="Liên kết rút gọn" data-en="Shortened links">
+                Liên kết rút gọn
+              </h3>
+              <p
+                data-vi="URL rút gọn che giấu địa chỉ đích ban đầu. Hãy xác minh nguồn gửi và đích đến trước khi truy cập."
+                data-en="Shortened URLs hide the original destination. Verify the sender and destination before opening them."
+              >
+                URL rút gọn che giấu địa chỉ đích ban đầu. Hãy xác minh nguồn
+                gửi và đích đến trước khi truy cập.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="bottom-section">
+        <div class="container">
+          <div class="bottom-card">
+            <div>
+              <span class="section-label">STAY SAFE ONLINE</span>
+              <h2
+                data-vi="Cẩn thận trước khi nhấn vào liên kết"
+                data-en="Think before you click"
+              >
+                Cẩn thận trước khi nhấn vào liên kết
+              </h2>
+              <p
+                data-vi="Không cung cấp mật khẩu, mã OTP hoặc thông tin cá nhân trên những website chưa được xác minh."
+                data-en="Never share passwords, OTP codes or personal information on unverified websites."
+              >
+                Không cung cấp mật khẩu, mã OTP hoặc thông tin cá nhân trên
+                những website chưa được xác minh.
+              </p>
+            </div>
+            <a href="thu-vien-kien-thuc.html" class="bottom-link">
+              <span data-vi="Tìm hiểu thêm" data-en="Learn more"
+                >Tìm hiểu thêm</span
+              >
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <a href="index.html" class="footer-brand">CyberSafe</a>
+        <p
+          data-vi="Website học tập về an toàn thông tin và nhận diện lừa đảo trực tuyến."
+          data-en="An educational website about information security and online scam awareness."
+        >
+          Website học tập về an toàn thông tin và nhận diện lừa đảo trực tuyến.
+        </p>
+        <span>© <span id="year"></span> CyberSafe</span>
+      </div>
+    </footer>
+
+    <script src="js/url.js"></script>
+  </body>
+</html>

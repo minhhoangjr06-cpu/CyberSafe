@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <meta
+      name="description"
+      content="CyberSafe - Nền tảng thực hành nhận diện lừa đảo trực tuyến và nâng cao kiến thức an toàn thông tin."
+    />
+    <title>CyberSafe | Bảo vệ bạn trên không gian số</title>
+    <link rel="icon" type="image/png" href="img/cypersafe-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand">
+          <img
+            class="brand-logo"
+            src="img/cypersafe-logo.png"
+            alt="CyberSafe"
+            onerror="
+              this.hidden = true;
+              this.nextElementSibling.hidden = false;
+            "
+          />
+          <span class="brand-fallback" hidden>CS</span>
+
+          <span class="brand-copy">
+            <strong>CyberSafe</strong>
+            <small data-vi="An toàn thông tin" data-en="Information Security"
+              >An toàn thông tin</small
+            >
+          </span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          type="button"
+          aria-label="Mở menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html" class="active" data-vi="Trang chủ" data-en="Home"
+            >Trang chủ</a
+          >
+          <a
+            href="kiem-tra-url.html"
+            data-vi="Kiểm tra URL"
+            data-en="URL Checker"
+            >Kiểm tra URL</a
+          >
+          <a href="kiem-tra-mat-khau.html" data-vi="Mật khẩu" data-en="Password"
+            >Mật khẩu</a
+          >
+          <a href="trac-nghiem.html" data-vi="Trắc nghiệm" data-en="Quiz"
+            >Trắc nghiệm</a
+          >
+          <a
+            href="tinh-huong-lua-dao.html"
+            data-vi="Tình huống"
+            data-en="Scam Cases"
+            >Tình huống</a
+          >
+          <a
+            href="huong-dan-xu-ly.html"
+            data-vi="Xử lý"
+            data-en="Response Guide"
+            >Xử lý</a
+          >
+          <a
+            href="thu-vien-kien-thuc.html"
+            data-vi="Thư viện"
+            data-en="Knowledge"
+            >Thư viện</a
+          >
+        </nav>
+
+        <button
+          class="lang-switch"
+          id="langSwitch"
+          type="button"
+          data-lang="vi"
+          aria-label="Chuyển đổi ngôn ngữ"
+        >
+          <span class="lang-label active">VIE</span>
+          <span class="lang-track">
+            <span class="lang-knob" id="langKnob"></span>
+          </span>
+          <span class="lang-label">ENG</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-glow hero-glow-one"></div>
+        <div class="hero-glow hero-glow-two"></div>
+
+        <div class="container hero-inner">
+          <div class="hero-text reveal">
+            <div class="badge">
+              <span class="status-dot"></span>
+              <span
+                data-vi="ĐỒ ÁN AN TOÀN THÔNG TIN"
+                data-en="INFORMATION SECURITY PROJECT"
+                >ĐỒ ÁN AN TOÀN THÔNG TIN</span
+              >
+            </div>
+
+            <h1
+              data-vi="Đừng để một cú nhấp chuột khiến bạn gặp rủi ro."
+              data-en="One click should never put you at risk."
+            >
+              Đừng để một cú nhấp chuột khiến bạn gặp rủi ro.
+            </h1>
+
+            <p
+              class="hero-description"
+              data-vi="Nhận diện dấu hiệu lừa đảo, kiểm tra đường dẫn đáng ngờ và rèn luyện kỹ năng tự bảo vệ trong thế giới số cùng CyberSafe."
+              data-en="Identify scam signals, check suspicious links, and build your digital self-protection skills with CyberSafe."
+            >
+              Nhận diện dấu hiệu lừa đảo, kiểm tra đường dẫn đáng ngờ và rèn
+              luyện kỹ năng tự bảo vệ trong thế giới số cùng CyberSafe.
+            </p>
+
+            <div class="hero-actions">
+              <a href="kiem-tra-url.html" class="btn btn-primary">
+                <span data-vi="Kiểm tra URL ngay" data-en="Check a URL"
+                  >Kiểm tra URL ngay</span
+                >
+                <span class="btn-arrow">↗</span>
+              </a>
+
+              <a href="#tools" class="btn btn-secondary">
+                <span data-vi="Khám phá công cụ" data-en="Explore tools"
+                  >Khám phá công cụ</span
+                >
+              </a>
+            </div>
+
+            <div class="hero-proof">
+              <span class="proof-icon">✓</span>
+              <span
+                data-vi="Thực hành kiến thức an toàn thông tin"
+                data-en="Practice information security skills"
+              >
+                Thực hành kiến thức an toàn thông tin
+              </span>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal">
+            <div class="visual-grid"></div>
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="orbit orbit-three"></div>
+
+            <div class="visual-particle particle-one"></div>
+            <div class="visual-particle particle-two"></div>
+            <div class="visual-particle particle-three"></div>
+            <div class="visual-particle particle-four"></div>
+
+            <div class="shield-wrap">
+              <div class="shield-aura"></div>
+
+              <div class="shield-core">
+                <svg
+                  viewBox="0 0 100 115"
+                  class="shield-symbol"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M50 5 L88 20 V48 C88 75 72 94 50 108 C28 94 12 75 12 48 V20 Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M32 55 L44 67 L69 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+
+              <div class="shield-ring"></div>
+            </div>
+
+            <div class="floating-card threat-card">
+              <span class="floating-icon danger-icon">!</span>
+              <span class="floating-copy">
+                <strong data-vi="Phát hiện rủi ro" data-en="Risk detected"
+                  >Phát hiện rủi ro</strong
+                >
+                <small data-vi="Đường dẫn đáng ngờ" data-en="Suspicious URL"
+                  >Đường dẫn đáng ngờ</small
+                >
+              </span>
+              <span class="mini-status danger-status"></span>
+            </div>
+
+            <div class="floating-card safe-card">
+              <span class="floating-icon safe-icon">✓</span>
+              <span class="floating-copy">
+                <strong data-vi="Bảo vệ chủ động" data-en="Proactive protection"
+                  >Bảo vệ chủ động</strong
+                >
+                <small
+                  data-vi="Kiểm tra trước khi nhấp"
+                  data-en="Check before clicking"
+                  >Kiểm tra trước khi nhấp</small
+                >
+              </span>
+            </div>
+
+            <div class="visual-caption">
+              <span class="caption-line"></span>
+              <span
+                data-vi="BẢO VỆ DANH TÍNH SỐ CỦA BẠN"
+                data-en="PROTECT YOUR DIGITAL IDENTITY"
+              >
+                BẢO VỆ DANH TÍNH SỐ CỦA BẠN
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <a href="#overview" class="scroll-indicator" aria-label="Cuộn xuống">
+          <span></span>
+        </a>
+      </section>
+
+      <section class="stats-section" id="overview">
+        <div class="container stats-grid">
+          <div class="stat-item reveal">
+            <strong>06</strong>
+            <span data-vi="Công cụ và nội dung" data-en="Tools and resources"
+              >Công cụ và nội dung</span
+            >
+          </div>
+
+          <div class="stat-item reveal">
+            <strong>24/7</strong>
+            <span data-vi="Chủ động học tập" data-en="Learn at your pace"
+              >Chủ động học tập</span
+            >
+          </div>
+
+          <div class="stat-item reveal">
+            <strong>01</strong>
+            <span data-vi="Mục tiêu: an toàn số" data-en="Goal: digital safety"
+              >Mục tiêu: an toàn số</span
+            >
+          </div>
+
+          <div class="stat-note reveal">
+            <span class="status-dot"></span>
+            <p
+              data-vi="Hiểu rủi ro. Kiểm tra kỹ. Bảo vệ chính mình."
+              data-en="Understand risks. Verify carefully. Protect yourself."
+            >
+              Hiểu rủi ro. Kiểm tra kỹ. Bảo vệ chính mình.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section tools-section" id="tools">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div>
+              <span
+                class="section-kicker"
+                data-vi="BỘ CÔNG CỤ CYBERSAFE"
+                data-en="THE CYBERSAFE TOOLKIT"
+              >
+                BỘ CÔNG CỤ CYBERSAFE
+              </span>
+              <h2
+                data-vi="An toàn hơn trên mạng, bắt đầu từ những điều nhỏ nhất."
+                data-en="A safer digital life starts with small steps."
+              >
+                An toàn hơn trên mạng, bắt đầu từ những điều nhỏ nhất.
+              </h2>
+            </div>
+
+            <p
+              data-vi="Các công cụ tương tác giúp bạn thực hành kỹ năng nhận diện nguy cơ và xử lý tình huống thường gặp trên Internet."
+              data-en="Interactive tools help you practice identifying risks and responding to common online threats."
+            >
+              Các công cụ tương tác giúp bạn thực hành kỹ năng nhận diện nguy cơ
+              và xử lý tình huống thường gặp trên Internet.
+            </p>
+          </div>
+
+          <div class="tools-grid">
+            <a href="kiem-tra-url.html" class="tool-card reveal">
+              <div class="tool-card-top">
+                <span class="tool-icon icon-blue">⌕</span>
+                <span class="tool-number">01 / URL</span>
+              </div>
+              <h3 data-vi="Phân tích URL" data-en="URL Analysis">
+                Phân tích URL
+              </h3>
+              <p
+                data-vi="Kiểm tra các dấu hiệu bất thường trong đường dẫn và nhận biết những yếu tố có thể đáng ngờ."
+                data-en="Inspect unusual link patterns and identify signals that may indicate a suspicious URL."
+              >
+                Kiểm tra các dấu hiệu bất thường trong đường dẫn và nhận biết
+                những yếu tố có thể đáng ngờ.
+              </p>
+              <span
+                class="tool-link"
+                data-vi="Khám phá công cụ ↗"
+                data-en="Explore tool ↗"
+                >Khám phá công cụ ↗</span
+              >
+            </a>
+
+            <a href="kiem-tra-mat-khau.html" class="tool-card reveal">
+              <div class="tool-card-top">
+                <span class="tool-icon icon-purple">⌘</span>
+                <span class="tool-number">02 / PASS</span>
+              </div>
+              <h3 data-vi="Độ mạnh mật khẩu" data-en="Password Strength">
+                Độ mạnh mật khẩu
+              </h3>
+              <p
+                data-vi="Đánh giá các đặc điểm của mật khẩu và tìm hiểu cách tạo mật khẩu khó đoán hơn."
+                data-en="Evaluate password characteristics and learn how to create stronger, harder-to-guess passwords."
+              >
+                Đánh giá các đặc điểm của mật khẩu và tìm hiểu cách tạo mật khẩu
+                khó đoán hơn.
+              </p>
+              <span
+                class="tool-link"
+                data-vi="Kiểm tra ngay ↗"
+                data-en="Check now ↗"
+                >Kiểm tra ngay ↗</span
+              >
+            </a>
+
+            <a href="trac-nghiem.html" class="tool-card reveal">
+              <div class="tool-card-top">
+                <span class="tool-icon icon-cyan">✓</span>
+                <span class="tool-number">03 / QUIZ</span>
+              </div>
+              <h3 data-vi="Trắc nghiệm kiến thức" data-en="Security Quiz">
+                Trắc nghiệm kiến thức
+              </h3>
+              <p
+                data-vi="Kiểm tra kiến thức an toàn thông tin thông qua những câu hỏi và tình huống thực tế."
+                data-en="Test your information security knowledge with questions and practical scenarios."
+              >
+                Kiểm tra kiến thức an toàn thông tin thông qua những câu hỏi và
+                tình huống thực tế.
+              </p>
+              <span
+                class="tool-link"
+                data-vi="Thử sức ngay ↗"
+                data-en="Take the quiz ↗"
+                >Thử sức ngay ↗</span
+              >
+            </a>
+
+            <a href="tinh-huong-lua-dao.html" class="tool-card reveal">
+              <div class="tool-card-top">
+                <span class="tool-icon icon-orange">!</span>
+                <span class="tool-number">04 / SCAM</span>
+              </div>
+              <h3 data-vi="Tình huống lừa đảo" data-en="Scam Simulations">
+                Tình huống lừa đảo
+              </h3>
+              <p
+                data-vi="Thực hành nhận diện tin nhắn đáng ngờ và phân biệt những dấu hiệu thường gặp của lừa đảo."
+                data-en="Practice spotting suspicious messages and recognizing common scam indicators."
+              >
+                Thực hành nhận diện tin nhắn đáng ngờ và phân biệt những dấu
+                hiệu thường gặp của lừa đảo.
+              </p>
+              <span
+                class="tool-link"
+                data-vi="Thực hành ngay ↗"
+                data-en="Practice now ↗"
+                >Thực hành ngay ↗</span
+              >
+            </a>
+
+            <a href="huong-dan-xu-ly.html" class="tool-card reveal">
+              <div class="tool-card-top">
+                <span class="tool-icon icon-green">↗</span>
+                <span class="tool-number">05 / GUIDE</span>
+              </div>
+              <h3 data-vi="Hướng dẫn xử lý" data-en="Response Guide">
+                Hướng dẫn xử lý
+              </h3>
+              <p
+                data-vi="Tìm hiểu những bước nên thực hiện khi nghi ngờ gặp lừa đảo hoặc đã cung cấp thông tin."
+                data-en="Learn what to do if you suspect a scam or have already shared sensitive information."
+              >
+                Tìm hiểu những bước nên thực hiện khi nghi ngờ gặp lừa đảo hoặc
+                đã cung cấp thông tin.
+              </p>
+              <span
+                class="tool-link"
+                data-vi="Xem hướng dẫn ↗"
+                data-en="Read the guide ↗"
+                >Xem hướng dẫn ↗</span
+              >
+            </a>
+
+            <a href="thu-vien-kien-thuc.html" class="tool-card reveal">
+              <div class="tool-card-top">
+                <span class="tool-icon icon-pink">▤</span>
+                <span class="tool-number">06 / LEARN</span>
+              </div>
+              <h3 data-vi="Thư viện kiến thức" data-en="Knowledge Library">
+                Thư viện kiến thức
+              </h3>
+              <p
+                data-vi="Tra cứu kiến thức, mẹo bảo mật và cách phòng tránh những nguy cơ trên không gian mạng."
+                data-en="Explore security knowledge, practical tips, and ways to prevent online threats."
+              >
+                Tra cứu kiến thức, mẹo bảo mật và cách phòng tránh những nguy cơ
+                trên không gian mạng.
+              </p>
+              <span
+                class="tool-link"
+                data-vi="Tìm hiểu thêm ↗"
+                data-en="Learn more ↗"
+                >Tìm hiểu thêm ↗</span
+              >
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="risk-section">
+        <div class="container risk-grid">
+          <div class="risk-content reveal">
+            <span
+              class="section-kicker"
+              data-vi="NHẬN DIỆN NGUY CƠ"
+              data-en="RECOGNIZE THE RISK"
+            >
+              NHẬN DIỆN NGUY CƠ
+            </span>
+
+            <h2
+              data-vi="Một tin nhắn có thể trông rất đáng tin. Nhưng bạn đã kiểm tra chưa?"
+              data-en="A message can look convincing. But have you verified it?"
+            >
+              Một tin nhắn có thể trông rất đáng tin. Nhưng bạn đã kiểm tra
+              chưa?
+            </h2>
+
+            <p
+              data-vi="Kẻ lừa đảo thường tạo cảm giác khẩn cấp, giả danh tổ chức quen thuộc hoặc yêu cầu cung cấp thông tin nhạy cảm. Hãy dừng lại và xác minh trước khi hành động."
+              data-en="Scammers often create urgency, impersonate familiar organizations, or request sensitive information. Pause and verify before taking action."
+            >
+              Kẻ lừa đảo thường tạo cảm giác khẩn cấp, giả danh tổ chức quen
+              thuộc hoặc yêu cầu cung cấp thông tin nhạy cảm. Hãy dừng lại và
+              xác minh trước khi hành động.
+            </p>
+
+            <a href="tinh-huong-lua-dao.html" class="text-link">
+              <span
+                data-vi="Thử nhận diện tình huống"
+                data-en="Try a scam scenario"
+                >Thử nhận diện tình huống</span
+              >
+              <span>↗</span>
+            </a>
+          </div>
+
+          <div class="message-demo reveal">
+            <div class="message-window">
+              <div class="message-top">
+                <div class="message-avatar">?</div>
+                <div class="message-sender">
+                  <strong data-vi="Tin nhắn minh họa" data-en="Sample message"
+                    >Tin nhắn minh họa</strong
+                  >
+                  <small
+                    data-vi="Tình huống giả lập để học tập"
+                    data-en="Simulated learning scenario"
+                    >Tình huống giả lập để học tập</small
+                  >
+                </div>
+                <span class="message-dots">•••</span>
+              </div>
+
+              <div class="message-body">
+                <span
+                  class="message-tag"
+                  data-vi="VÍ DỤ GIẢ LẬP"
+                  data-en="SIMULATED EXAMPLE"
+                  >VÍ DỤ GIẢ LẬP</span
+                >
+                <p
+                  data-vi="Tài khoản của bạn cần được xác minh ngay. Hãy truy cập đường dẫn bên dưới để tránh bị gián đoạn dịch vụ."
+                  data-en="Your account needs immediate verification. Visit the link below to avoid service interruption."
+                >
+                  Tài khoản của bạn cần được xác minh ngay. Hãy truy cập đường
+                  dẫn bên dưới để tránh bị gián đoạn dịch vụ.
+                </p>
+
+                <div class="fake-link">
+                  <span class="link-symbol">↗</span>
+                  <span>verify-account.example.invalid</span>
+                </div>
+
+                <div class="warning-list">
+                  <div>
+                    <span class="warning-mark">!</span>
+                    <span
+                      data-vi="Tạo cảm giác khẩn cấp"
+                      data-en="Creates urgency"
+                      >Tạo cảm giác khẩn cấp</span
+                    >
+                  </div>
+                  <div>
+                    <span class="warning-mark">!</span>
+                    <span
+                      data-vi="Yêu cầu xác minh qua liên kết"
+                      data-en="Requests verification via a link"
+                      >Yêu cầu xác minh qua liên kết</span
+                    >
+                  </div>
+                  <div>
+                    <span class="warning-mark">!</span>
+                    <span
+                      data-vi="Cần xác minh nguồn gửi"
+                      data-en="Sender needs verification"
+                      >Cần xác minh nguồn gửi</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="message-bottom">
+                <span class="status-dot danger-status"></span>
+                <span
+                  data-vi="Ví dụ phục vụ mục đích giáo dục"
+                  data-en="For educational purposes"
+                  >Ví dụ phục vụ mục đích giáo dục</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process-section">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div>
+              <span
+                class="section-kicker"
+                data-vi="NGUYÊN TẮC AN TOÀN"
+                data-en="SAFETY PRINCIPLES"
+              >
+                NGUYÊN TẮC AN TOÀN
+              </span>
+              <h2
+                data-vi="Ba bước nhỏ. Thêm một lớp bảo vệ."
+                data-en="Three simple steps. One stronger layer of protection."
+              >
+                Ba bước nhỏ. Thêm một lớp bảo vệ.
+              </h2>
+            </div>
+          </div>
+
+          <div class="process-grid">
+            <div class="process-item reveal">
+              <span class="process-number">01</span>
+              <div class="process-line"></div>
+              <h3 data-vi="Nhận diện" data-en="Recognize">Nhận diện</h3>
+              <p
+                data-vi="Quan sát dấu hiệu đáng ngờ trong URL, email và tin nhắn."
+                data-en="Look for suspicious signals in URLs, emails, and messages."
+              >
+                Quan sát dấu hiệu đáng ngờ trong URL, email và tin nhắn.
+              </p>
+            </div>
+
+            <div class="process-item reveal">
+              <span class="process-number">02</span>
+              <div class="process-line"></div>
+              <h3 data-vi="Xác minh" data-en="Verify">Xác minh</h3>
+              <p
+                data-vi="Không vội nhấp liên kết. Kiểm tra thông tin từ nguồn chính thức."
+                data-en="Do not rush to click. Verify information through official sources."
+              >
+                Không vội nhấp liên kết. Kiểm tra thông tin từ nguồn chính thức.
+              </p>
+            </div>
+
+            <div class="process-item reveal">
+              <span class="process-number">03</span>
+              <div class="process-line"></div>
+              <h3 data-vi="Ứng phó" data-en="Respond">Ứng phó</h3>
+              <p
+                data-vi="Bảo vệ tài khoản, đổi thông tin cần thiết và báo cáo khi có rủi ro."
+                data-en="Secure accounts, change necessary credentials, and report incidents."
+              >
+                Bảo vệ tài khoản, đổi thông tin cần thiết và báo cáo khi có rủi
+                ro.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cta-section">
+        <div class="container">
+          <div class="cta-box reveal">
+            <div class="cta-decoration"></div>
+
+            <div class="cta-content">
+              <span
+                class="section-kicker"
+                data-vi="BẮT ĐẦU TỪ HÔM NAY"
+                data-en="START TODAY"
+              >
+                BẮT ĐẦU TỪ HÔM NAY
+              </span>
+
+              <h2
+                data-vi="Chủ động bảo vệ mình trong thế giới số."
+                data-en="Take control of your digital safety."
+              >
+                Chủ động bảo vệ mình trong thế giới số.
+              </h2>
+
+              <p
+                data-vi="Thử kiểm tra một đường dẫn hoặc khám phá các tình huống giả lập ngay bây giờ."
+                data-en="Check a link or explore a simulated scam scenario right now."
+              >
+                Thử kiểm tra một đường dẫn hoặc khám phá các tình huống giả lập
+                ngay bây giờ.
+              </p>
+            </div>
+
+            <div class="cta-actions">
+              <a href="kiem-tra-url.html" class="btn btn-primary">
+                <span data-vi="Bắt đầu kiểm tra" data-en="Start checking"
+                  >Bắt đầu kiểm tra</span
+                >
+                <span class="btn-arrow">↗</span>
+              </a>
+
+              <a href="thu-vien-kien-thuc.html" class="btn btn-secondary">
+                <span data-vi="Thư viện kiến thức" data-en="Knowledge library"
+                  >Thư viện kiến thức</span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <span class="footer-mark">CS</span>
+            <span class="brand-copy">
+              <strong>CyberSafe</strong>
+              <small data-vi="An toàn thông tin" data-en="Information Security"
+                >An toàn thông tin</small
+              >
+            </span>
+          </a>
+
+          <p
+            data-vi="Website học tập hỗ trợ nhận diện và phòng tránh các hình thức lừa đảo trực tuyến."
+            data-en="An educational website that helps users identify and prevent online scams."
+          >
+            Website học tập hỗ trợ nhận diện và phòng tránh các hình thức lừa
+            đảo trực tuyến.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h4 data-vi="Công cụ" data-en="Tools">Công cụ</h4>
+          <a
+            href="kiem-tra-url.html"
+            data-vi="Kiểm tra URL"
+            data-en="URL Checker"
+            >Kiểm tra URL</a
+          >
+          <a href="kiem-tra-mat-khau.html" data-vi="Mật khẩu" data-en="Password"
+            >Mật khẩu</a
+          >
+          <a href="trac-nghiem.html" data-vi="Trắc nghiệm" data-en="Quiz"
+            >Trắc nghiệm</a
+          >
+        </div>
+
+        <div class="footer-column">
+          <h4 data-vi="Tìm hiểu thêm" data-en="Learn more">Tìm hiểu thêm</h4>
+          <a
+            href="tinh-huong-lua-dao.html"
+            data-vi="Tình huống lừa đảo"
+            data-en="Scam scenarios"
+            >Tình huống lừa đảo</a
+          >
+          <a
+            href="huong-dan-xu-ly.html"
+            data-vi="Hướng dẫn xử lý"
+            data-en="Response guide"
+            >Hướng dẫn xử lý</a
+          >
+          <a
+            href="thu-vien-kien-thuc.html"
+            data-vi="Thư viện kiến thức"
+            data-en="Knowledge library"
+            >Thư viện kiến thức</a
+          >
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <span>© 2026 CyberSafe</span>
+        <span
+          data-vi="Học tập hôm nay. An toàn ngày mai."
+          data-en="Learn today. Stay safer tomorrow."
+        >
+          Học tập hôm nay. An toàn ngày mai.
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const body = document.body;
+        const langSwitch = document.getElementById("langSwitch");
+        const navToggle = document.getElementById("navToggle");
+        const siteNav = document.getElementById("siteNav");
+        const cursorGlow = document.getElementById("cursorGlow");
+
+        function setLanguage(language) {
+          document.documentElement.lang = language;
+
+          document
+            .querySelectorAll("[data-vi][data-en]")
+            .forEach(function (element) {
+              const translatedText =
+                language === "en"
+                  ? element.getAttribute("data-en")
+                  : element.getAttribute("data-vi");
+
+              if (translatedText !== null) {
+                element.textContent = translatedText;
+              }
+            });
+
+          langSwitch.dataset.lang = language;
+
+          langSwitch
+            .querySelectorAll(".lang-label")
+            .forEach(function (label, index) {
+              label.classList.toggle(
+                "active",
+                (language === "vi" && index === 0) ||
+                  (language === "en" && index === 1),
+              );
+            });
+
+          document.title =
+            language === "en"
+              ? "CyberSafe | Protect Yourself Online"
+              : "CyberSafe | Bảo vệ bạn trên không gian số";
+        }
+
+        langSwitch.addEventListener("click", function () {
+          const nextLanguage = langSwitch.dataset.lang === "vi" ? "en" : "vi";
+          setLanguage(nextLanguage);
+        });
+
+        navToggle.addEventListener("click", function () {
+          const isOpen = siteNav.classList.toggle("open");
+          navToggle.classList.toggle("open", isOpen);
+          navToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        siteNav.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            siteNav.classList.remove("open");
+            navToggle.classList.remove("open");
+            navToggle.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+          link.addEventListener("click", function (event) {
+            const targetId = link.getAttribute("href");
+
+            if (targetId.length > 1) {
+              const target = document.querySelector(targetId);
+
+              if (target) {
+                event.preventDefault();
+                target.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            }
+          });
+        });
+
+        if (cursorGlow && window.matchMedia("(pointer: fine)").matches) {
+          document.addEventListener("mousemove", function (event) {
+            cursorGlow.style.left = event.clientX + "px";
+            cursorGlow.style.top = event.clientY + "px";
+            cursorGlow.classList.add("active");
+          });
+        }
+
+        const revealElements = document.querySelectorAll(".reveal");
+
+        if ("IntersectionObserver" in window) {
+          body.classList.add("js-ready");
+
+          const revealObserver = new IntersectionObserver(
+            function (entries, observer) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            {
+              threshold: 0.08,
+              rootMargin: "0px 0px 40px 0px",
+            },
+          );
+
+          revealElements.forEach(function (element) {
+            revealObserver.observe(element);
+          });
+
+          document
+            .querySelectorAll(".hero .reveal")
+            .forEach(function (element) {
+              element.classList.add("is-visible");
+            });
+        } else {
+          revealElements.forEach(function (element) {
+            element.classList.add("is-visible");
+          });
+        }
+
+        setLanguage("vi");
+      });
+    </script>
+  </body>
+</html>

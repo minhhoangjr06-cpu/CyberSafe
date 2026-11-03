@@ -1,0 +1,1524 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Thực hành nhận diện dấu hiệu lừa đảo qua các tình huống mô phỏng trên CyberSafe."
+    />
+    <title>CyberSafe | Nhận diện tình huống lừa đảo</title>
+    <link rel="icon" type="image/png" href="img/cypersafe-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .scenario-page {
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 8% 22%,
+            rgba(50, 145, 225, 0.1),
+            transparent 27%
+          ),
+          radial-gradient(
+            circle at 95% 55%,
+            rgba(139, 124, 255, 0.07),
+            transparent 25%
+          ),
+          #07111f;
+      }
+      .scenario-page .site-header {
+        background: rgba(7, 17, 31, 0.9);
+      }
+      .scenario-hero {
+        position: relative;
+        overflow: hidden;
+        padding: 66px 0 58px;
+        border-bottom: 1px solid rgba(159, 190, 225, 0.08);
+        isolation: isolate;
+      }
+      .scenario-hero:before {
+        position: absolute;
+        z-index: -1;
+        top: -300px;
+        right: -80px;
+        width: 700px;
+        height: 700px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(85, 200, 255, 0.16),
+          transparent 67%
+        );
+        content: "";
+        filter: blur(12px);
+      }
+      .scenario-grid {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        opacity: 0.15;
+        background-image:
+          linear-gradient(rgba(120, 171, 218, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(120, 171, 218, 0.08) 1px, transparent 1px);
+        background-size: 50px 50px;
+        mask-image: linear-gradient(to bottom, #000, transparent 95%);
+      }
+      .scenario-hero-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 340px;
+        align-items: center;
+        gap: 35px;
+      }
+      .scenario-hero-copy {
+        max-width: 740px;
+        animation: scenarioRise 0.8s ease both;
+      }
+      .scenario-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 13px;
+        border: 1px solid rgba(85, 200, 255, 0.2);
+        border-radius: 50px;
+        background: rgba(85, 200, 255, 0.07);
+        color: #a9dfff;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+      }
+      .scenario-eyebrow:before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #65e8b2;
+        box-shadow: 0 0 13px rgba(101, 232, 178, 0.8);
+        content: "";
+        animation: scenarioPulse 1.8s infinite;
+      }
+      .scenario-hero h1 {
+        max-width: 700px;
+        margin-top: 22px;
+        color: #f2f7ff;
+        font-size: clamp(35px, 4.5vw, 57px);
+        font-weight: 800;
+        letter-spacing: -2px;
+        line-height: 1.18;
+        text-wrap: balance;
+      }
+      .scenario-hero h1 span {
+        color: #72e1f2;
+        text-shadow: 0 0 35px rgba(85, 200, 255, 0.22);
+      }
+      .scenario-hero-copy > p {
+        max-width: 650px;
+        margin-top: 18px;
+        color: #9aacc3;
+        font-size: 12px;
+        line-height: 2;
+      }
+      .scenario-highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-top: 25px;
+      }
+      .scenario-highlight {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 11px;
+        border: 1px solid rgba(159, 190, 225, 0.12);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.035);
+        color: #b6c7dc;
+        font-size: 9px;
+        font-weight: 600;
+      }
+      .scenario-highlight b {
+        color: #76e8e4;
+        font-size: 12px;
+      }
+      .scenario-visual {
+        position: relative;
+        display: grid;
+        min-height: 285px;
+        place-items: center;
+        animation: scenarioRise 0.9s 0.12s ease both;
+      }
+      .scenario-orbit {
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        border: 1px solid rgba(85, 200, 255, 0.2);
+        border-radius: 50%;
+        animation: scenarioSpin 26s linear infinite;
+      }
+      .scenario-orbit:before,
+      .scenario-orbit:after {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #72f0e3;
+        box-shadow: 0 0 18px rgba(114, 240, 227, 0.8);
+        content: "";
+      }
+      .scenario-orbit:before {
+        top: 28px;
+        left: 35px;
+      }
+      .scenario-orbit:after {
+        right: 16px;
+        bottom: 58px;
+        background: #8b7cff;
+        box-shadow: 0 0 18px rgba(139, 124, 255, 0.8);
+      }
+      .scenario-orbit.inner {
+        width: 205px;
+        height: 205px;
+        border-style: dashed;
+        border-color: rgba(139, 124, 255, 0.25);
+        animation-duration: 34s;
+        animation-direction: reverse;
+      }
+      .scenario-phone {
+        position: relative;
+        z-index: 2;
+        width: 205px;
+        padding: 14px;
+        border: 1px solid rgba(133, 197, 244, 0.24);
+        border-radius: 24px;
+        background: linear-gradient(
+          145deg,
+          rgba(23, 52, 82, 0.97),
+          rgba(10, 25, 44, 0.98)
+        );
+        box-shadow:
+          0 25px 75px rgba(0, 0, 0, 0.35),
+          0 0 45px rgba(62, 174, 235, 0.1);
+        animation: scenarioFloat 5s ease-in-out infinite;
+      }
+      .scenario-phone-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 3px 4px 12px;
+        color: #7f9bb8;
+        font-size: 8px;
+      }
+      .scenario-phone-dot {
+        display: flex;
+        gap: 4px;
+      }
+      .scenario-phone-dot i {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #56718e;
+      }
+      .scenario-phone-screen {
+        padding: 17px 13px;
+        border: 1px solid rgba(159, 190, 225, 0.1);
+        border-radius: 15px;
+        background: rgba(4, 14, 27, 0.55);
+      }
+      .scenario-phone-icon {
+        display: grid;
+        width: 49px;
+        height: 49px;
+        margin: 0 auto 12px;
+        place-items: center;
+        border: 1px solid rgba(255, 180, 106, 0.25);
+        border-radius: 16px;
+        background: rgba(255, 180, 106, 0.09);
+        color: #ffc17e;
+        font-size: 22px;
+      }
+      .scenario-phone-screen strong {
+        display: block;
+        color: #edf6ff;
+        font-size: 10px;
+        text-align: center;
+      }
+      .scenario-phone-screen small {
+        display: block;
+        margin-top: 6px;
+        color: #8da5c0;
+        font-size: 8px;
+        line-height: 1.7;
+        text-align: center;
+      }
+      .scenario-float {
+        position: absolute;
+        z-index: 3;
+        padding: 9px 12px;
+        border: 1px solid rgba(159, 190, 225, 0.16);
+        border-radius: 11px;
+        background: rgba(13, 31, 52, 0.94);
+        color: #d9eaff;
+        font-size: 9px;
+        font-weight: 700;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+        animation: scenarioFloat 4s ease-in-out infinite;
+      }
+      .scenario-float.top {
+        top: 25px;
+        right: 0;
+      }
+      .scenario-float.bottom {
+        bottom: 20px;
+        left: 0;
+        animation-delay: -1.8s;
+      }
+      .scenario-float span {
+        color: #ffbf79;
+      }
+      .scenario-section {
+        padding: 43px 0 85px;
+      }
+      .scenario-intro {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 25px;
+        margin-bottom: 23px;
+        animation: scenarioRise 0.6s ease both;
+      }
+      .scenario-intro-kicker {
+        color: #70d8ee;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+      .scenario-intro h2 {
+        margin-top: 7px;
+        color: #f0f7ff;
+        font-size: 25px;
+        font-weight: 800;
+        letter-spacing: -0.7px;
+      }
+      .scenario-intro p {
+        max-width: 420px;
+        margin-top: 6px;
+        color: #8ea3bd;
+        font-size: 10px;
+        line-height: 1.8;
+      }
+      .scenario-mode {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        flex-shrink: 0;
+        padding: 8px 11px;
+        border: 1px solid rgba(101, 232, 178, 0.16);
+        border-radius: 50px;
+        background: rgba(101, 232, 178, 0.06);
+        color: #8ce8c0;
+        font-size: 8px;
+        font-weight: 700;
+      }
+      .scenario-mode:before {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #65e8b2;
+        content: "";
+      }
+      .scenario-layout {
+        display: grid;
+        grid-template-columns: 275px minmax(0, 1fr);
+        align-items: start;
+        gap: 20px;
+      }
+      .scenario-sidebar {
+        position: sticky;
+        top: 108px;
+        display: grid;
+        gap: 14px;
+      }
+      .scenario-card {
+        padding: 19px;
+        border: 1px solid rgba(159, 190, 225, 0.13);
+        border-radius: 17px;
+        background: linear-gradient(
+          145deg,
+          rgba(17, 35, 57, 0.96),
+          rgba(10, 25, 43, 0.97)
+        );
+        box-shadow: 0 15px 42px rgba(0, 0, 0, 0.13);
+      }
+      .scenario-card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .scenario-card-label {
+        color: #a7bad1;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .scenario-card-icon {
+        display: grid;
+        width: 32px;
+        height: 32px;
+        place-items: center;
+        border: 1px solid rgba(85, 200, 255, 0.16);
+        border-radius: 10px;
+        background: rgba(85, 200, 255, 0.08);
+        color: #7edfff;
+        font-size: 14px;
+      }
+      .scenario-progress-number {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        margin-top: 13px;
+        color: #f1f8ff;
+        font-size: 27px;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+      }
+      .scenario-progress-number small {
+        color: #7f94ae;
+        font-size: 10px;
+        font-weight: 600;
+      }
+      .scenario-progress-track {
+        overflow: hidden;
+        height: 7px;
+        margin-top: 12px;
+        border-radius: 20px;
+        background: rgba(143, 171, 204, 0.14);
+      }
+      .scenario-progress-track span {
+        display: block;
+        width: 33.333%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #4db9ff, #72f0e3);
+        box-shadow: 0 0 16px rgba(85, 200, 255, 0.45);
+        transition: width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .scenario-progress-caption {
+        margin-top: 8px;
+        color: #8fa4bd;
+        font-size: 9px;
+      }
+      .scenario-step-dots {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        margin-top: 14px;
+      }
+      .scenario-step-dots span {
+        height: 4px;
+        border-radius: 5px;
+        background: rgba(143, 171, 204, 0.17);
+        transition:
+          background 0.3s,
+          box-shadow 0.3s;
+      }
+      .scenario-step-dots span.active {
+        background: #72e9e4;
+        box-shadow: 0 0 9px rgba(114, 240, 227, 0.45);
+      }
+      .case-list {
+        display: grid;
+        gap: 8px;
+        margin-top: 15px;
+      }
+      .case-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 13px 13px 13px 15px;
+        border: 1px solid rgba(159, 190, 225, 0.1);
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.025);
+        cursor: pointer;
+        transition:
+          transform 0.25s,
+          border-color 0.25s,
+          background 0.25s,
+          box-shadow 0.25s;
+      }
+      .case-item:before {
+        position: absolute;
+        top: 13px;
+        bottom: 13px;
+        left: 0;
+        width: 2px;
+        border-radius: 3px;
+        background: transparent;
+        content: "";
+        transition: background 0.25s;
+      }
+      .case-item:hover {
+        transform: translateX(3px);
+        border-color: rgba(85, 200, 255, 0.28);
+        background: rgba(85, 200, 255, 0.045);
+      }
+      .case-item.active {
+        border-color: rgba(85, 200, 255, 0.35);
+        background: linear-gradient(
+          100deg,
+          rgba(85, 200, 255, 0.11),
+          rgba(114, 240, 227, 0.035)
+        );
+        box-shadow: inset 0 0 20px rgba(85, 200, 255, 0.025);
+      }
+      .case-item.active:before {
+        background: #72e7e5;
+        box-shadow: 0 0 10px rgba(114, 240, 227, 0.5);
+      }
+      .case-item strong {
+        color: #e4effd;
+        font-size: 10px;
+        font-weight: 800;
+      }
+      .case-item p {
+        color: #8298b3;
+        font-size: 8px;
+      }
+      .scenario-tip-list {
+        display: grid;
+        gap: 11px;
+        margin-top: 15px;
+        list-style: none;
+      }
+      .scenario-tip-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        color: #91a5bf;
+        font-size: 9px;
+        line-height: 1.7;
+      }
+      .scenario-tip-list b {
+        display: grid;
+        width: 19px;
+        height: 19px;
+        flex: 0 0 19px;
+        place-items: center;
+        border-radius: 6px;
+        background: rgba(114, 240, 227, 0.09);
+        color: #72f0e3;
+        font-size: 9px;
+      }
+      .scenario-main {
+        min-width: 0;
+      }
+      .scenario-main-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 12px;
+      }
+      .scenario-current-label {
+        color: #71d9f3;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.1px;
+        text-transform: uppercase;
+      }
+      .scenario-current-number {
+        color: #9bb0c9;
+        font-size: 9px;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+      .scenario-workspace {
+        overflow: hidden;
+        border: 1px solid rgba(159, 190, 225, 0.14);
+        border-radius: 19px;
+        background: linear-gradient(
+          145deg,
+          rgba(17, 35, 57, 0.96),
+          rgba(9, 23, 40, 0.98)
+        );
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+        animation: scenarioRise 0.65s 0.08s ease both;
+      }
+      .scenario-workspace-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 17px 20px;
+        border-bottom: 1px solid rgba(159, 190, 225, 0.1);
+        background: rgba(255, 255, 255, 0.018);
+      }
+      .scenario-source {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        min-width: 0;
+      }
+      .scenario-source-avatar {
+        display: grid;
+        width: 39px;
+        height: 39px;
+        flex: 0 0 39px;
+        place-items: center;
+        border: 1px solid rgba(255, 180, 106, 0.2);
+        border-radius: 13px;
+        background: rgba(255, 180, 106, 0.09);
+        color: #ffc17e;
+        font-size: 16px;
+      }
+      .scenario-source-copy {
+        min-width: 0;
+      }
+      .scenario-source-copy strong {
+        display: block;
+        overflow: hidden;
+        color: #eaf3ff;
+        font-size: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .scenario-source-copy small {
+        display: block;
+        margin-top: 4px;
+        color: #8298b3;
+        font-size: 8px;
+      }
+      .scenario-simulation-tag {
+        flex-shrink: 0;
+        padding: 6px 9px;
+        border: 1px solid rgba(255, 180, 106, 0.18);
+        border-radius: 7px;
+        background: rgba(255, 180, 106, 0.07);
+        color: #ffc17e;
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+      }
+      .scenario-message-area {
+        padding: 22px 22px 24px;
+      }
+      .scenario-message-label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 12px;
+        color: #8299b4;
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .scenario-message-label:before {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #ffb46a;
+        box-shadow: 0 0 9px rgba(255, 180, 106, 0.5);
+        content: "";
+      }
+      .scenario-message-bubble {
+        position: relative;
+        max-width: 760px;
+        padding: 19px 20px;
+        border: 1px solid rgba(255, 180, 106, 0.14);
+        border-radius: 4px 16px 16px 16px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 180, 106, 0.055),
+          rgba(255, 255, 255, 0.018)
+        );
+        color: #d7e5f5;
+        font-size: 12px;
+        line-height: 2;
+        overflow-wrap: anywhere;
+      }
+      .scenario-message-bubble:before {
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: 3px;
+        height: 32px;
+        border-radius: 3px;
+        background: #ffb46a;
+        content: "";
+      }
+      .scenario-disclaimer {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        margin-top: 15px;
+        padding: 11px 13px;
+        border: 1px solid rgba(85, 200, 255, 0.12);
+        border-radius: 10px;
+        background: rgba(85, 200, 255, 0.035);
+        color: #8fa6c0;
+        font-size: 8px;
+        line-height: 1.8;
+      }
+      .scenario-disclaimer b {
+        color: #79dff0;
+        font-size: 12px;
+      }
+      .scenario-clues {
+        padding: 21px 22px 22px;
+        border-top: 1px solid rgba(159, 190, 225, 0.1);
+      }
+      .scenario-clues-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .scenario-clues-head h3 {
+        color: #edf5ff;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .scenario-clues-head p {
+        margin-top: 5px;
+        color: #8298b3;
+        font-size: 8px;
+      }
+      .scenario-selected-count {
+        flex-shrink: 0;
+        padding: 7px 10px;
+        border: 1px solid rgba(85, 200, 255, 0.17);
+        border-radius: 8px;
+        background: rgba(85, 200, 255, 0.06);
+        color: #8ceaff;
+        font-size: 8px;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+      }
+      .clue-options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+      }
+      .clue-option {
+        position: relative;
+        display: flex;
+        min-height: 58px;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border: 1px solid rgba(159, 190, 225, 0.12);
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.025);
+        color: #aebfd3;
+        font-size: 9px;
+        font-weight: 600;
+        line-height: 1.65;
+        cursor: pointer;
+        transition:
+          transform 0.23s,
+          border-color 0.23s,
+          background 0.23s,
+          color 0.23s;
+      }
+      .clue-option:before {
+        display: grid;
+        width: 26px;
+        height: 26px;
+        flex: 0 0 26px;
+        place-items: center;
+        border: 1px solid rgba(159, 190, 225, 0.16);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+        color: #91a7c0;
+        font-size: 9px;
+        font-weight: 800;
+        content: "+";
+        transition: all 0.23s;
+      }
+      .clue-option:hover {
+        transform: translateY(-2px);
+        border-color: rgba(85, 200, 255, 0.32);
+        background: rgba(85, 200, 255, 0.045);
+        color: #e5f3ff;
+      }
+      .clue-option.selected {
+        border-color: rgba(85, 200, 255, 0.48);
+        background: linear-gradient(
+          100deg,
+          rgba(85, 200, 255, 0.12),
+          rgba(114, 240, 227, 0.045)
+        );
+        color: #eff8ff;
+        box-shadow: inset 0 0 18px rgba(85, 200, 255, 0.03);
+      }
+      .clue-option.selected:before {
+        border-color: rgba(114, 240, 227, 0.4);
+        background: rgba(114, 240, 227, 0.14);
+        color: #72f0e3;
+        content: "✓";
+      }
+      .scenario-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 17px;
+      }
+      .scenario-actions .btn {
+        min-width: 150px;
+        cursor: pointer;
+      }
+      .scenario-actions .btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .scenario-actions .btn-primary {
+        box-shadow: 0 8px 28px rgba(62, 188, 235, 0.15);
+      }
+      .feedback-box {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-height: 61px;
+        margin-top: 16px;
+        padding: 13px 15px;
+        border: 1px solid rgba(85, 200, 255, 0.12);
+        border-radius: 11px;
+        background: rgba(85, 200, 255, 0.035);
+        color: #9db2ca;
+        font-size: 9px;
+        line-height: 1.8;
+        transition:
+          border-color 0.25s,
+          background 0.25s;
+      }
+      .feedback-box:before {
+        color: #72dff0;
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        content: "FEEDBACK";
+      }
+      .feedback-box strong {
+        color: #8ce8c0;
+        font-size: 10px;
+      }
+      .feedback-box p {
+        color: #a2b5cb;
+        font-size: 9px;
+        line-height: 1.8;
+      }
+      .feedback-box.has-result {
+        border-color: rgba(101, 232, 178, 0.2);
+        background: rgba(101, 232, 178, 0.045);
+      }
+      .feedback-box.has-result.is-incorrect {
+        border-color: rgba(255, 180, 106, 0.2);
+        background: rgba(255, 180, 106, 0.045);
+      }
+      .feedback-box.has-result.is-incorrect strong {
+        color: #ffc17e;
+      }
+      .scenario-bottom-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 15px;
+        padding: 13px 15px;
+        border: 1px solid rgba(159, 190, 225, 0.1);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.02);
+        color: #8298b3;
+        font-size: 9px;
+        line-height: 1.8;
+      }
+      .scenario-bottom-note span {
+        color: #72dff0;
+        font-size: 14px;
+      }
+      .scenario-page .site-footer .footer-bottom {
+        justify-content: center;
+      }
+      @keyframes scenarioRise {
+        from {
+          opacity: 0;
+          transform: translateY(17px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes scenarioFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes scenarioSpin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes scenarioPulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.55;
+        }
+      }
+      @media (max-width: 1050px) {
+        .scenario-hero-inner {
+          grid-template-columns: minmax(0, 1fr) 290px;
+          gap: 15px;
+        }
+        .scenario-visual {
+          transform: scale(0.88);
+        }
+        .scenario-layout {
+          grid-template-columns: 245px minmax(0, 1fr);
+          gap: 16px;
+        }
+        .scenario-card {
+          padding: 16px;
+        }
+      }
+      @media (max-width: 850px) {
+        .scenario-hero-inner {
+          grid-template-columns: 1fr;
+        }
+        .scenario-visual {
+          display: none;
+        }
+        .scenario-layout {
+          grid-template-columns: 1fr;
+        }
+        .scenario-sidebar {
+          position: static;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .scenario-tip-card {
+          grid-column: 1/-1;
+        }
+        .scenario-tip-list {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 620px) {
+        .scenario-hero {
+          padding: 44px 0 38px;
+        }
+        .scenario-hero h1 {
+          font-size: 34px;
+          letter-spacing: -1.3px;
+        }
+        .scenario-hero-copy > p {
+          font-size: 10px;
+        }
+        .scenario-highlight {
+          padding: 7px 9px;
+          font-size: 8px;
+        }
+        .scenario-section {
+          padding: 27px 0 58px;
+        }
+        .scenario-intro {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .scenario-intro h2 {
+          font-size: 22px;
+        }
+        .scenario-sidebar {
+          gap: 9px;
+        }
+        .scenario-card {
+          padding: 13px;
+          border-radius: 14px;
+        }
+        .scenario-progress-number {
+          font-size: 23px;
+        }
+        .scenario-card-label {
+          font-size: 8px;
+        }
+        .scenario-tip-list {
+          grid-template-columns: 1fr;
+        }
+        .scenario-main-top {
+          margin-bottom: 9px;
+        }
+        .scenario-workspace {
+          border-radius: 15px;
+        }
+        .scenario-workspace-head {
+          padding: 13px;
+        }
+        .scenario-message-area {
+          padding: 17px 14px;
+        }
+        .scenario-message-bubble {
+          padding: 15px;
+          font-size: 10px;
+        }
+        .scenario-clues {
+          padding: 17px 14px;
+        }
+        .scenario-clues-head {
+          align-items: flex-start;
+        }
+        .clue-options {
+          grid-template-columns: 1fr;
+          gap: 7px;
+        }
+        .clue-option {
+          min-height: 51px;
+        }
+        .scenario-actions {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+        .scenario-actions .btn {
+          min-width: 0;
+          padding: 0 9px;
+          font-size: 9px;
+        }
+        .feedback-box {
+          padding: 11px;
+        }
+        .scenario-simulation-tag {
+          font-size: 7px;
+          padding: 6px 7px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .scenario-page *,
+        .scenario-page *:before,
+        .scenario-page *:after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="scenario-page">
+    <div class="cursor-glow"></div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand">
+          <img
+            class="brand-logo"
+            src="img/cypersafe-logo.png"
+            alt="CyberSafe"
+            onerror="
+              this.hidden = true;
+              this.nextElementSibling.hidden = false;
+            "
+          />
+          <span class="brand-fallback" hidden>CS</span>
+          <span class="brand-copy">
+            <strong>CyberSafe</strong>
+            <small data-vi="An toàn thông tin" data-en="Information Security"
+              >An toàn thông tin</small
+            >
+          </span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          type="button"
+          aria-label="Mở menu"
+        >
+          ☰
+        </button>
+
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
+          <a
+            href="kiem-tra-url.html"
+            data-vi="Kiểm tra URL"
+            data-en="URL Checker"
+            >Kiểm tra URL</a
+          >
+          <a href="kiem-tra-mat-khau.html" data-vi="Mật khẩu" data-en="Password"
+            >Mật khẩu</a
+          >
+          <a href="trac-nghiem.html" data-vi="Trắc nghiệm" data-en="Quiz"
+            >Trắc nghiệm</a
+          >
+          <a
+            href="tinh-huong-lua-dao.html"
+            class="active"
+            data-vi="Tình huống"
+            data-en="Scam Cases"
+            >Tình huống</a
+          >
+          <a
+            href="huong-dan-xu-ly.html"
+            data-vi="Xử lý"
+            data-en="Response Guide"
+            >Xử lý</a
+          >
+          <a
+            href="thu-vien-kien-thuc.html"
+            data-vi="Thư viện"
+            data-en="Knowledge"
+            >Thư viện</a
+          >
+        </nav>
+
+        <button
+          class="lang-switch"
+          id="langSwitch"
+          type="button"
+          data-lang="vi"
+          aria-label="Chuyển đổi ngôn ngữ"
+        >
+          <span class="lang-label active">VIE</span>
+          <span class="lang-track"
+            ><span class="lang-knob" id="langKnob"></span
+          ></span>
+          <span class="lang-label">ENG</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="scenario-hero">
+        <div class="scenario-grid"></div>
+        <div class="container scenario-hero-inner">
+          <div class="scenario-hero-copy">
+            <span class="scenario-eyebrow">CyberSafe Awareness Lab</span>
+            <h1
+              data-vi="Bạn có nhận ra <span>bẫy lừa đảo?</span>"
+              data-en="Can you spot a <span>scam attempt?</span>"
+            >
+              Bạn có nhận ra <span>bẫy lừa đảo?</span>
+            </h1>
+            <p
+              data-vi="Thử sức với những tin nhắn giả lập thường gặp trong môi trường số. Hãy quan sát nội dung, phát hiện dấu hiệu bất thường và chọn tất cả chi tiết khiến bạn nghi ngờ trước khi kiểm tra đáp án."
+              data-en="Practice with simulated messages commonly seen online. Examine the content, spot unusual signs, and select every detail that makes you suspicious before checking your answer."
+            >
+              Thử sức với những tin nhắn giả lập thường gặp trong môi trường số.
+              Hãy quan sát nội dung, phát hiện dấu hiệu bất thường và chọn tất
+              cả chi tiết khiến bạn nghi ngờ trước khi kiểm tra đáp án.
+            </p>
+            <div class="scenario-highlights">
+              <span class="scenario-highlight"
+                ><b>03</b
+                ><span data-vi="Tình huống" data-en="Scenarios"
+                  >Tình huống</span
+                ></span
+              >
+              <span class="scenario-highlight"
+                ><b>12</b
+                ><span
+                  data-vi="Dấu hiệu cần nhận biết"
+                  data-en="Signs to identify"
+                  >Dấu hiệu cần nhận biết</span
+                ></span
+              >
+              <span class="scenario-highlight"
+                ><b>100%</b
+                ><span
+                  data-vi="Thực hành mô phỏng"
+                  data-en="Simulation practice"
+                  >Thực hành mô phỏng</span
+                ></span
+              >
+            </div>
+          </div>
+
+          <div class="scenario-visual" aria-hidden="true">
+            <div class="scenario-orbit"></div>
+            <div class="scenario-orbit inner"></div>
+            <div class="scenario-phone">
+              <div class="scenario-phone-top">
+                <span>CYBERSAFE SIMULATOR</span
+                ><span class="scenario-phone-dot"><i></i><i></i><i></i></span>
+              </div>
+              <div class="scenario-phone-screen">
+                <div class="scenario-phone-icon">⚠</div>
+                <strong>MESSAGE ALERT</strong>
+                <small
+                  >Recognize suspicious messages before taking action.</small
+                >
+              </div>
+            </div>
+            <div class="scenario-float top">
+              <span>!</span> Suspicious activity
+            </div>
+            <div class="scenario-float bottom">
+              <span>✓</span> Think before you click
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scenario-section">
+        <div class="container">
+          <div class="scenario-intro">
+            <div>
+              <span
+                class="scenario-intro-kicker"
+                data-vi="Khu vực thực hành"
+                data-en="Practice environment"
+                >Khu vực thực hành</span
+              >
+              <h2 data-vi="Phân tích tình huống" data-en="Analyze the scenario">
+                Phân tích tình huống
+              </h2>
+              <p
+                data-vi="Chọn một tình huống ở danh sách bên trái, đánh dấu những dấu hiệu đáng ngờ trong nội dung và kiểm tra kết quả."
+                data-en="Choose a scenario from the list, mark suspicious signs in the message, and check your result."
+              >
+                Chọn một tình huống ở danh sách bên trái, đánh dấu những dấu
+                hiệu đáng ngờ trong nội dung và kiểm tra kết quả.
+              </p>
+            </div>
+            <span
+              class="scenario-mode"
+              data-vi="Chế độ mô phỏng"
+              data-en="Simulation mode"
+              >Chế độ mô phỏng</span
+            >
+          </div>
+
+          <div class="scenario-layout">
+            <aside class="scenario-sidebar">
+              <div class="scenario-card">
+                <div class="scenario-card-head">
+                  <span
+                    class="scenario-card-label"
+                    data-vi="Tiến độ tình huống"
+                    data-en="Scenario progress"
+                    >Tiến độ tình huống</span
+                  >
+                  <span class="scenario-card-icon">◫</span>
+                </div>
+                <div class="scenario-progress-number">
+                  <span id="scenarioCurrent">01</span><small>/ 03</small>
+                </div>
+                <div class="scenario-progress-track">
+                  <span id="scenarioProgressFill"></span>
+                </div>
+                <p
+                  class="scenario-progress-caption"
+                  id="scenarioProgressCaption"
+                >
+                  Tình huống 1 trên 3
+                </p>
+                <div
+                  class="scenario-step-dots"
+                  id="scenarioStepDots"
+                  aria-hidden="true"
+                >
+                  <span class="active"></span><span></span><span></span>
+                </div>
+                <div class="case-list" id="caseList"></div>
+              </div>
+
+              <div class="scenario-card scenario-tip-card">
+                <div class="scenario-card-head">
+                  <span
+                    class="scenario-card-label"
+                    data-vi="Nguyên tắc an toàn"
+                    data-en="Safety principles"
+                    >Nguyên tắc an toàn</span
+                  >
+                  <span class="scenario-card-icon">✦</span>
+                </div>
+                <ul class="scenario-tip-list">
+                  <li>
+                    <b>1</b
+                    ><span
+                      data-vi="Không vội tin vào thông báo gây áp lực thời gian."
+                      data-en="Do not trust messages that pressure you with time limits."
+                      >Không vội tin vào thông báo gây áp lực thời gian.</span
+                    >
+                  </li>
+                  <li>
+                    <b>2</b
+                    ><span
+                      data-vi="Không cung cấp mật khẩu hoặc mã OTP qua tin nhắn, đường link lạ."
+                      data-en="Never share passwords or OTP codes through suspicious messages or links."
+                      >Không cung cấp mật khẩu hoặc mã OTP qua tin nhắn, đường
+                      link lạ.</span
+                    >
+                  </li>
+                  <li>
+                    <b>3</b
+                    ><span
+                      data-vi="Xác minh người gửi qua kênh liên lạc chính thức."
+                      data-en="Verify the sender through an official communication channel."
+                      >Xác minh người gửi qua kênh liên lạc chính thức.</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </aside>
+
+            <section
+              class="scenario-main"
+              aria-label="Khu vực phân tích tin nhắn"
+            >
+              <div class="scenario-main-top">
+                <span
+                  class="scenario-current-label"
+                  data-vi="Nội dung mô phỏng"
+                  data-en="Simulated message"
+                  >Nội dung mô phỏng</span
+                >
+                <span class="scenario-current-number" id="scenarioCaseNumber"
+                  >01 / 03</span
+                >
+              </div>
+
+              <div class="scenario-workspace">
+                <div class="scenario-workspace-head">
+                  <div class="scenario-source">
+                    <div class="scenario-source-avatar">✉</div>
+                    <div class="scenario-source-copy">
+                      <strong
+                        data-vi="Tin nhắn mô phỏng"
+                        data-en="Simulated message"
+                        >Tin nhắn mô phỏng</strong
+                      >
+                      <small id="caseTitle">SMS 01</small>
+                    </div>
+                  </div>
+                  <span
+                    class="scenario-simulation-tag"
+                    data-vi="GIẢ LẬP"
+                    data-en="SIMULATED"
+                    >GIẢ LẬP</span
+                  >
+                </div>
+
+                <div class="scenario-message-area">
+                  <div
+                    class="scenario-message-label"
+                    data-vi="Nội dung nhận được"
+                    data-en="Received message"
+                  >
+                    Nội dung nhận được
+                  </div>
+                  <div class="scenario-message-bubble">
+                    <p id="caseMessage"></p>
+                  </div>
+                  <div class="scenario-disclaimer">
+                    <b>ⓘ</b
+                    ><span
+                      data-vi="Đây là nội dung được tạo ra nhằm mục đích học tập. Không truy cập đường link hoặc thực hiện theo yêu cầu trong các tình huống mô phỏng."
+                      data-en="This content is created for learning purposes. Do not open links or follow requests shown in simulated scenarios."
+                      >Đây là nội dung được tạo ra nhằm mục đích học tập. Không
+                      truy cập đường link hoặc thực hiện theo yêu cầu trong các
+                      tình huống mô phỏng.</span
+                    >
+                  </div>
+                </div>
+
+                <div class="scenario-clues">
+                  <div class="scenario-clues-head">
+                    <div>
+                      <h3
+                        data-vi="Những dấu hiệu nào khiến bạn nghi ngờ?"
+                        data-en="Which signs make you suspicious?"
+                      >
+                        Những dấu hiệu nào khiến bạn nghi ngờ?
+                      </h3>
+                      <p
+                        data-vi="Có thể chọn nhiều đáp án. Bấm lại để bỏ chọn."
+                        data-en="Select multiple answers. Click again to deselect."
+                      >
+                        Có thể chọn nhiều đáp án. Bấm lại để bỏ chọn.
+                      </p>
+                    </div>
+                    <span
+                      class="scenario-selected-count"
+                      id="scenarioSelectedCount"
+                      >0 đã chọn</span
+                    >
+                  </div>
+                  <div id="clueOptions" class="clue-options"></div>
+
+                  <div class="scenario-actions">
+                    <button
+                      class="btn btn-primary"
+                      id="checkCaseBtn"
+                      type="button"
+                    >
+                      <span data-vi="Kiểm tra đáp án" data-en="Check answer"
+                        >Kiểm tra đáp án</span
+                      ><span class="btn-arrow">→</span>
+                    </button>
+                    <button
+                      class="btn btn-secondary"
+                      id="nextCaseBtn"
+                      type="button"
+                    >
+                      <span
+                        data-vi="Tình huống tiếp theo"
+                        data-en="Next scenario"
+                        >Tình huống tiếp theo</span
+                      >
+                    </button>
+                  </div>
+
+                  <div
+                    class="feedback-box"
+                    id="caseFeedback"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    Hãy chọn các dấu hiệu bạn cho là đáng ngờ rồi bấm kiểm tra
+                    đáp án.
+                  </div>
+                </div>
+              </div>
+
+              <div class="scenario-bottom-note">
+                <span>✦</span>
+                <p
+                  data-vi="Mẹo: Kẻ gian thường tạo cảm giác khẩn cấp, đưa ra lợi ích bất thường hoặc yêu cầu bạn cung cấp thông tin và chuyển tiền. Hãy luôn dừng lại để xác minh trước khi hành động."
+                  data-en="Tip: Scammers often create urgency, offer unrealistic rewards, or ask for sensitive information and money. Pause and verify before taking action."
+                >
+                  Mẹo: Kẻ gian thường tạo cảm giác khẩn cấp, đưa ra lợi ích bất
+                  thường hoặc yêu cầu bạn cung cấp thông tin và chuyển tiền. Hãy
+                  luôn dừng lại để xác minh trước khi hành động.
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-bottom">
+        <span>© <span id="year"></span> CyberSafe</span>
+        <span
+          data-vi="Nhận diện rủi ro · Chủ động bảo vệ"
+          data-en="Recognize risks · Stay protected"
+          >Nhận diện rủi ro · Chủ động bảo vệ</span
+        >
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/tinh-huong.js"></script>
+    <script>
+      const caseListElement = document.getElementById("caseList");
+      const clueOptionsElement = document.getElementById("clueOptions");
+      const caseFeedbackElement = document.getElementById("caseFeedback");
+      const languageIsEnglish = () => document.documentElement.lang === "en";
+
+      function updateScenarioProgress() {
+        const items = [...caseListElement.querySelectorAll(".case-item")];
+        const total = items.length || 3;
+        const activeIndex = Math.max(
+          0,
+          items.findIndex((item) => item.classList.contains("active")),
+        );
+        const current = activeIndex + 1;
+        const currentText = String(current).padStart(2, "0");
+        const totalText = String(total).padStart(2, "0");
+
+        document.getElementById("scenarioCurrent").textContent = currentText;
+        document.getElementById("scenarioCaseNumber").textContent =
+          `${currentText} / ${totalText}`;
+        document.getElementById("scenarioProgressFill").style.width =
+          `${(current / total) * 100}%`;
+        document.getElementById("scenarioProgressCaption").textContent =
+          languageIsEnglish()
+            ? `Scenario ${current} of ${total}`
+            : `Tình huống ${current} trên ${total}`;
+
+        document
+          .querySelectorAll("#scenarioStepDots span")
+          .forEach((dot, index) => {
+            dot.classList.toggle("active", index === activeIndex);
+          });
+      }
+
+      function updateClueCount() {
+        const selected = clueOptionsElement.querySelectorAll(
+          ".clue-option.selected",
+        ).length;
+        document.getElementById("scenarioSelectedCount").textContent =
+          languageIsEnglish() ? `${selected} selected` : `${selected} đã chọn`;
+      }
+
+      function updateFeedbackStyle() {
+        const hasResult = Boolean(caseFeedbackElement.querySelector("strong"));
+        const feedbackText = caseFeedbackElement.textContent.toLowerCase();
+        const incorrect =
+          feedbackText.includes("chưa chính xác") ||
+          feedbackText.includes("not fully correct");
+        caseFeedbackElement.classList.toggle("has-result", hasResult);
+        caseFeedbackElement.classList.toggle(
+          "is-incorrect",
+          hasResult && incorrect,
+        );
+      }
+
+      const caseObserver = new MutationObserver(() => {
+        updateScenarioProgress();
+      });
+      caseObserver.observe(caseListElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+
+      const clueObserver = new MutationObserver(updateClueCount);
+      clueObserver.observe(clueOptionsElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+
+      const feedbackObserver = new MutationObserver(updateFeedbackStyle);
+      feedbackObserver.observe(caseFeedbackElement, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
+
+      window.addEventListener("languageChanged", () => {
+        updateScenarioProgress();
+        updateClueCount();
+        updateFeedbackStyle();
+      });
+
+      updateScenarioProgress();
+      updateClueCount();
+      updateFeedbackStyle();
+    </script>
+  </body>
+</html>

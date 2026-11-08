@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kiểm tra URL | CyberSafe</title>
+    <meta
+      name="description"
+      content="CyberSafe giúp nhận diện các dấu hiệu đáng ngờ trong đường dẫn URL và nâng cao nhận thức an toàn thông tin."
+    />
+
+    <link rel="stylesheet" href="css/url.css" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #071525;
+        color: #edf5ff;
+        min-height: 100vh;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .site-header {
+        width: 100%;
+        background: #081624;
+        border-bottom: 1px solid #1c344a;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: auto;
+        min-height: 90px;
+        padding: 15px 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+      }
+
+      .brand-mark {
+        width: 52px;
+        height: 52px;
+        border-radius: 15px;
+        background: linear-gradient(135deg, #42c8f5, #70e5d5);
+        color: #071525;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+        font-weight: 900;
+      }
+
+      .brand-name {
+        font-size: 21px;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+      }
+
+      .brand-subtitle {
+        margin-top: 5px;
+        font-size: 10px;
+        color: #6eabd5;
+        letter-spacing: 1.5px;
+        font-weight: bold;
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+
+      .nav-menu a {
+        padding: 13px 14px;
+        border-radius: 10px;
+        color: #a9bad0;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.25s;
+      }
+
+      .nav-menu a:hover,
+      .nav-menu a.active {
+        color: #55d0ff;
+        background: #112b40;
+      }
+
+      .language-switch {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        gap: 4px;
+        border: 1px solid #284158;
+        border-radius: 12px;
+        background: #102236;
+        flex-shrink: 0;
+      }
+
+      .language-switch button {
+        border: none;
+        background: transparent;
+        color: #9eb1c8;
+        padding: 9px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+
+      .language-switch button.active {
+        color: #061827;
+        background: #62d8ee;
+      }
+
+      .hero {
+        max-width: 1200px;
+        margin: auto;
+        padding: 85px 25px 75px;
+        display: grid;
+        grid-template-columns: 1fr 440px;
+        align-items: center;
+        gap: 65px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 16px;
+        border: 1px solid #24516b;
+        border-radius: 30px;
+        background: #10283b;
+        color: #83d8f6;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        margin-bottom: 28px;
+      }
+
+      .eyebrow-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #55e3b4;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 5vw, 65px);
+        line-height: 1.15;
+        font-weight: 900;
+        margin-bottom: 25px;
+        letter-spacing: -1.5px;
+      }
+
+      .hero h1 span {
+        display: block;
+        color: #51c8f5;
+        margin-top: 8px;
+      }
+
+      .hero-description {
+        color: #a8bad0;
+        font-size: 16px;
+        line-height: 1.9;
+        max-width: 650px;
+        margin-bottom: 28px;
+      }
+
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      .feature {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        color: #c6d6e7;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .feature-icon {
+        width: 21px;
+        height: 21px;
+        border-radius: 50%;
+        background: #4eddb2;
+        color: #06251f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      .tool-card {
+        padding: 30px;
+        border: 1px solid #244760;
+        border-radius: 22px;
+        background: linear-gradient(145deg, #142e46, #0d2033);
+        box-shadow: 0 20px 55px rgba(0, 0, 0, 0.25);
+      }
+
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #29445b;
+        margin-bottom: 25px;
+      }
+
+      .card-title {
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 1.2px;
+      }
+
+      .online-status {
+        color: #54e8b5;
+        font-size: 11px;
+        font-weight: bold;
+      }
+
+      .tool-heading {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .tool-description {
+        color: #9eb4ca;
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 25px;
+      }
+
+      .input-label {
+        display: block;
+        color: #d6e5f4;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .url-input {
+        width: 100%;
+        padding: 16px;
+        border-radius: 11px;
+        border: 1px solid #34536c;
+        outline: none;
+        background: #091a2a;
+        color: white;
+        font-size: 14px;
+        transition: 0.25s;
+      }
+
+      .url-input:focus {
+        border-color: #51c8f5;
+        box-shadow: 0 0 0 3px rgba(81, 200, 245, 0.12);
+      }
+
+      .url-input::placeholder {
+        color: #71869d;
+      }
+
+      .check-button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 16px;
+        border: none;
+        border-radius: 11px;
+        background: linear-gradient(100deg, #4cc8f5, #6de3d4);
+        color: #062033;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .check-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(75, 205, 240, 0.2);
+      }
+
+      .privacy-note {
+        margin-top: 18px;
+        color: #829bb2;
+        font-size: 12px;
+        line-height: 1.7;
+        text-align: center;
+      }
+
+      .result-box {
+        display: none;
+        margin-top: 25px;
+        padding: 20px;
+        border: 1px solid #34536c;
+        border-radius: 14px;
+        background: #091a2a;
+      }
+
+      .result-box.show {
+        display: block;
+        animation: appear 0.35s ease;
+      }
+
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .result-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .result-status {
+        display: inline-block;
+        padding: 7px 11px;
+        border-radius: 7px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      .status-high {
+        background: #49232b;
+        color: #ff8e9c;
+      }
+
+      .status-medium {
+        background: #49391e;
+        color: #ffd27a;
+      }
+
+      .status-low {
+        background: #153d36;
+        color: #6de8bb;
+      }
+
+      .result-list {
+        padding-left: 20px;
+        color: #b9cadd;
+        font-size: 13px;
+        line-height: 1.9;
+      }
+
+      .result-warning {
+        color: #829bb2;
+        font-size: 12px;
+        line-height: 1.7;
+        margin-top: 15px;
+      }
+
+      .information {
+        max-width: 1200px;
+        margin: auto;
+        padding: 25px 25px 85px;
+      }
+
+      .section-heading {
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 15px;
+      }
+
+      .section-description {
+        text-align: center;
+        color: #9eb2c9;
+        font-size: 14px;
+        line-height: 1.8;
+        max-width: 650px;
+        margin: 0 auto 35px;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .info-card {
+        padding: 25px;
+        border: 1px solid #203c54;
+        border-radius: 16px;
+        background: #0d2032;
+        transition: 0.25s;
+      }
+
+      .info-card:hover {
+        transform: translateY(-5px);
+        border-color: #3baedb;
+      }
+
+      .info-icon {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: #143c54;
+        color: #65d6f5;
+        font-size: 22px;
+        margin-bottom: 18px;
+      }
+
+      .info-card h3 {
+        font-size: 17px;
+        margin-bottom: 12px;
+      }
+
+      .info-card p {
+        color: #9eb2c9;
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      .site-footer {
+        border-top: 1px solid #20364b;
+        background: #081624;
+        padding: 28px 20px;
+        text-align: center;
+        color: #829bb2;
+        font-size: 12px;
+        line-height: 1.8;
+      }
+
+      .site-footer strong {
+        color: #60d4f5;
+      }
+
+      @media (max-width: 950px) {
+        .nav-container {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          padding-top: 55px;
+        }
+
+        .tool-card {
+          max-width: 600px;
+          width: 100%;
+          margin: auto;
+        }
+      }
+
+      @media (max-width: 650px) {
+        .nav-menu {
+          width: 100%;
+          gap: 2px;
+        }
+
+        .nav-menu a {
+          padding: 10px 8px;
+          font-size: 12px;
+        }
+
+        .hero {
+          padding: 45px 18px;
+        }
+
+        .hero h1 {
+          font-size: 39px;
+        }
+
+        .tool-card {
+          padding: 22px;
+        }
+
+        .features {
+          flex-direction: column;
+        }
+
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-heading {
+          font-size: 25px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="nav-container">
+        <a href="index.html" class="brand">
+          <div class="brand-mark">CS</div>
+          <div>
+            <div class="brand-name">CyberSafe</div>
+            <div class="brand-subtitle">INFORMATION SECURITY</div>
+          </div>
+        </a>
+
+        <nav class="nav-menu">
+          <a href="index.html" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
+          <a
+            href="kiem-tra-url.html"
+            class="active"
+            data-vi="Kiểm tra URL"
+            data-en="URL Checker"
+            >Kiểm tra URL</a
+          >
+          <a href="kiem-tra-mat-khau.html" data-vi="Mật khẩu" data-en="Password"
+            >Mật khẩu</a
+          >
+          <a href="trac-nghiem.html" data-vi="Trắc nghiệm" data-en="Quiz"
+            >Trắc nghiệm</a
+          >
+          <a
+            href="tinh-huong-lua-dao.html"
+            data-vi="Tình huống"
+            data-en="Scenarios"
+            >Tình huống</a
+          >
+          <a href="huong-dan-xu-ly.html" data-vi="Xử lý" data-en="Guides"
+            >Xử lý</a
+          >
+          <a href="thu-vien-kien-thuc.html" data-vi="Thư viện" data-en="Library"
+            >Thư viện</a
+          >
+        </nav>
+
+        <div class="language-switch">
+          <button id="langVi" class="active" onclick="changeLanguage('vi')">
+            VIE
+          </button>
+          <button id="langEn" onclick="changeLanguage('en')">ENG</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span
+              data-vi="CYBERSAFE SECURITY TOOLS"
+              data-en="CYBERSAFE SECURITY TOOLS"
+              >CYBERSAFE SECURITY TOOLS</span
+            >
+          </div>
+
+          <h1>
+            <span data-vi="Kiểm tra đường dẫn" data-en="Check suspicious"
+              >Kiểm tra đường dẫn</span
+            >
+            <span data-vi="URL đáng ngờ" data-en="URL links">URL đáng ngờ</span>
+          </h1>
+
+          <p
+            class="hero-description"
+            data-vi="Phân tích những dấu hiệu bất thường trong đường dẫn để nhận biết nguy cơ lừa đảo, giả mạo website và các liên kết không an toàn."
+            data-en="Analyze unusual URL characteristics to recognize potential scams, fake websites and unsafe links."
+          >
+            Phân tích những dấu hiệu bất thường trong đường dẫn để nhận biết
+            nguy cơ lừa đảo, giả mạo website và các liên kết không an toàn.
+          </p>
+
+          <div class="features">
+            <div class="feature">
+              <span class="feature-icon">✓</span>
+              <span data-vi="Phân tích trực tiếp" data-en="Instant analysis"
+                >Phân tích trực tiếp</span
+              >
+            </div>
+
+            <div class="feature">
+              <span class="feature-icon">✓</span>
+              <span data-vi="Không cần đăng nhập" data-en="No login required"
+                >Không cần đăng nhập</span
+              >
+            </div>
+
+            <div class="feature">
+              <span class="feature-icon">✓</span>
+              <span
+                data-vi="Không gửi URL lên máy chủ"
+                data-en="URL stays in your browser"
+                >Không gửi URL lên máy chủ</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="card-top">
+            <span
+              class="card-title"
+              data-vi="CÔNG CỤ KIỂM TRA URL"
+              data-en="URL CHECKER TOOL"
+              >CÔNG CỤ KIỂM TRA URL</span
+            >
+            <span class="online-status">● ONLINE</span>
+          </div>
+
+          <h2
+            class="tool-heading"
+            data-vi="Phân tích liên kết"
+            data-en="Analyze a link"
+          >
+            Phân tích liên kết
+          </h2>
+
+          <p
+            class="tool-description"
+            data-vi="Nhập đường dẫn website bạn muốn kiểm tra. CyberSafe sẽ phân tích một số dấu hiệu đáng chú ý."
+            data-en="Enter the website address you want to check. CyberSafe will analyze several warning signs."
+          >
+            Nhập đường dẫn website bạn muốn kiểm tra. CyberSafe sẽ phân tích một
+            số dấu hiệu đáng chú ý.
+          </p>
+
+          <form id="urlForm">
+            <label
+              class="input-label"
+              for="urlInput"
+              data-vi="Đường dẫn URL cần kiểm tra"
+              data-en="URL address to check"
+            >
+              Đường dẫn URL cần kiểm tra
+            </label>
+
+            <input
+              type="text"
+              id="urlInput"
+              class="url-input"
+              placeholder="https://example.com"
+              autocomplete="off"
+              spellcheck="false"
+            />
+
+            <button
+              type="submit"
+              class="check-button"
+              data-vi="Kiểm tra đường dẫn →"
+              data-en="Check URL →"
+            >
+              Kiểm tra đường dẫn →
+            </button>
+          </form>
+
+          <p
+            class="privacy-note"
+            data-vi="🔒 Đường dẫn được phân tích ngay trên trình duyệt, không gửi lên máy chủ."
+            data-en="🔒 The URL is analyzed in your browser and is not sent to a server."
+          >
+            🔒 Đường dẫn được phân tích ngay trên trình duyệt, không gửi lên máy
+            chủ.
+          </p>
+
+          <div class="result-box" id="resultBox">
+            <div class="result-heading">
+              <span>📊</span>
+              <span data-vi="Kết quả phân tích" data-en="Analysis result"
+                >Kết quả phân tích</span
+              >
+            </div>
+
+            <div id="resultStatus" class="result-status"></div>
+
+            <ul class="result-list" id="resultList"></ul>
+
+            <p
+              class="result-warning"
+              data-vi="Lưu ý: Đây là công cụ nhận diện dấu hiệu cơ bản, không phải hệ thống xác minh website theo thời gian thực. Không nên nhập mật khẩu hoặc thông tin cá nhân vào website chưa được xác minh."
+              data-en="Note: This tool checks basic warning signs and does not verify websites in real time. Do not enter passwords or personal information on unverified websites."
+            >
+              Lưu ý: Đây là công cụ nhận diện dấu hiệu cơ bản, không phải hệ
+              thống xác minh website theo thời gian thực. Không nên nhập mật
+              khẩu hoặc thông tin cá nhân vào website chưa được xác minh.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="information">
+        <h2
+          class="section-heading"
+          data-vi="Những dấu hiệu cần chú ý"
+          data-en="Warning signs to watch for"
+        >
+          Những dấu hiệu cần chú ý
+        </h2>
+
+        <p
+          class="section-description"
+          data-vi="Một đường dẫn đáng ngờ có thể chứa nhiều đặc điểm bất thường. Hãy quan sát kỹ trước khi truy cập hoặc cung cấp thông tin cá nhân."
+          data-en="A suspicious link may contain unusual characteristics. Always inspect it before visiting or sharing personal information."
+        >
+          Một đường dẫn đáng ngờ có thể chứa nhiều đặc điểm bất thường. Hãy quan
+          sát kỹ trước khi truy cập hoặc cung cấp thông tin cá nhân.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-icon">🔗</div>
+            <h3 data-vi="Tên miền bất thường" data-en="Unusual domain name">
+              Tên miền bất thường
+            </h3>
+            <p
+              data-vi="Tên miền có thể chứa ký tự lạ, nhiều dấu gạch ngang hoặc cố tình viết gần giống tên website chính thức."
+              data-en="A domain may contain unusual characters, excessive hyphens or imitate the name of an official website."
+            >
+              Tên miền có thể chứa ký tự lạ, nhiều dấu gạch ngang hoặc cố tình
+              viết gần giống tên website chính thức.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">⚠️</div>
+            <h3 data-vi="Liên kết rút gọn" data-en="Shortened links">
+              Liên kết rút gọn
+            </h3>
+            <p
+              data-vi="Một số đường dẫn rút gọn che giấu địa chỉ website đích. Hãy kiểm tra nguồn gửi trước khi truy cập."
+              data-en="Some shortened links hide the destination website. Check the sender before opening them."
+            >
+              Một số đường dẫn rút gọn che giấu địa chỉ website đích. Hãy kiểm
+              tra nguồn gửi trước khi truy cập.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">🔒</div>
+            <h3 data-vi="Kết nối không an toàn" data-en="Unsecured connection">
+              Kết nối không an toàn
+            </h3>
+            <p
+              data-vi="Đường dẫn sử dụng HTTP thay vì HTTPS cần được chú ý, đặc biệt khi website yêu cầu thông tin cá nhân."
+              data-en="Links using HTTP instead of HTTPS deserve extra attention, especially when personal information is requested."
+            >
+              Đường dẫn sử dụng HTTP thay vì HTTPS cần được chú ý, đặc biệt khi
+              website yêu cầu thông tin cá nhân.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        <strong>CyberSafe</strong> –
+        <span
+          data-vi="An toàn thông tin trong thế giới số"
+          data-en="Information security in the digital world"
+          >An toàn thông tin trong thế giới số</span
+        >
+      </p>
+      <p>© 2026 CyberSafe. All rights reserved.</p>
+    </footer>
+
+    <script>
+      var currentLanguage = "vi";
+
+      var translations = {
+        vi: {
+          empty: "Vui lòng nhập đường dẫn URL cần kiểm tra.",
+          invalid: "Đường dẫn không hợp lệ. Vui lòng kiểm tra lại.",
+          high: "CẢNH BÁO: CÓ NHIỀU DẤU HIỆU ĐÁNG NGỜ",
+          medium: "CẦN THẬN TRỌNG",
+          low: "CHƯA PHÁT HIỆN DẤU HIỆU RÕ RÀNG",
+          https: "Đường dẫn đang sử dụng HTTPS.",
+          http: "Đường dẫn sử dụng HTTP, kết nối có thể không được mã hóa.",
+          ip: "Đường dẫn sử dụng địa chỉ IP thay cho tên miền.",
+          at: "Đường dẫn chứa ký tự @, có thể gây nhầm lẫn về địa chỉ website.",
+          punycode:
+            "Tên miền chứa ký tự Punycode (xn--). Cần kiểm tra kỹ tên miền.",
+          long: "Tên miền có độ dài bất thường.",
+          short: "Đường dẫn sử dụng dịch vụ rút gọn URL.",
+          keyword:
+            "Đường dẫn chứa từ khóa thường xuất hiện trong các trang yêu cầu đăng nhập hoặc xác minh.",
+          port: "Đường dẫn sử dụng cổng kết nối khác thông thường.",
+          normal:
+            "Không phát hiện dấu hiệu bất thường rõ ràng qua các kiểm tra cơ bản.",
+          advice: "Hãy kiểm tra kỹ tên miền và nguồn gửi trước khi truy cập.",
+        },
+        en: {
+          empty: "Please enter a URL to check.",
+          invalid: "Invalid URL. Please check the address.",
+          high: "WARNING: MULTIPLE SUSPICIOUS SIGNS",
+          medium: "PROCEED WITH CAUTION",
+          low: "NO OBVIOUS WARNING SIGNS FOUND",
+          https: "The URL uses HTTPS.",
+          http: "The URL uses HTTP. The connection may not be encrypted.",
+          ip: "The URL uses an IP address instead of a domain name.",
+          at: "The URL contains the @ character, which may cause address confusion.",
+          punycode: "The domain contains Punycode (xn--). Check it carefully.",
+          long: "The domain name is unusually long.",
+          short: "The URL uses a link-shortening service.",
+          keyword:
+            "The URL contains words commonly used on login or verification pages.",
+          port: "The URL uses an uncommon connection port.",
+          normal: "No obvious warning signs were found in these basic checks.",
+          advice: "Check the domain and sender carefully before visiting.",
+        },
+      };
+
+      function changeLanguage(language) {
+        currentLanguage = language;
+
+        document.documentElement.lang = language;
+
+        document.querySelectorAll("[data-vi]").forEach(function (element) {
+          element.textContent = element.getAttribute("data-" + language);
+        });
+
+        document
+          .getElementById("langVi")
+          .classList.toggle("active", language === "vi");
+        document
+          .getElementById("langEn")
+          .classList.toggle("active", language === "en");
+
+        try {
+          localStorage.setItem("cybersafe-language", language);
+        } catch (error) {}
+      }
+
+      function checkURL(value) {
+        var rawURL = value.trim();
+
+        if (rawURL === "") {
+          alert(translations[currentLanguage].empty);
+          return;
+        }
+
+        var formattedURL = rawURL;
+
+        if (!/^https?:\/\//i.test(formattedURL)) {
+          formattedURL = "https://" + formattedURL;
+        }
+
+        var parsedURL;
+
+        try {
+          parsedURL = new URL(formattedURL);
+        } catch (error) {
+          alert(translations[currentLanguage].invalid);
+          return;
+        }
+
+        if (!parsedURL.hostname || !parsedURL.hostname.includes(".")) {
+          alert(translations[currentLanguage].invalid);
+          return;
+        }
+
+        var reasons = [];
+        var score = 0;
+        var host = parsedURL.hostname.toLowerCase();
+        var fullURL = formattedURL.toLowerCase();
+
+        if (parsedURL.protocol === "https:") {
+          reasons.push(translations[currentLanguage].https);
+        } else {
+          reasons.push(translations[currentLanguage].http);
+          score += 1;
+        }
+
+        if (/^\d{1,3}(\.\d{1,3}){3}$/.test(host)) {
+          reasons.push(translations[currentLanguage].ip);
+          score += 2;
+        }
+
+        if (rawURL.includes("@")) {
+          reasons.push(translations[currentLanguage].at);
+          score += 2;
+        }
+
+        if (host.includes("xn--")) {
+          reasons.push(translations[currentLanguage].punycode);
+          score += 2;
+        }
+
+        if (host.length > 40) {
+          reasons.push(translations[currentLanguage].long);
+          score += 1;
+        }
+
+        var shorteners = [
+          "bit.ly",
+          "tinyurl.com",
+          "t.co",
+          "cutt.ly",
+          "is.gd",
+          "rebrand.ly",
+          "shorturl.at",
+        ];
+
+        if (
+          shorteners.some(function (domain) {
+            return host === domain || host.endsWith("." + domain);
+          })
+        ) {
+          reasons.push(translations[currentLanguage].short);
+          score += 2;
+        }
+
+        var suspiciousWords = [
+          "verify",
+          "login",
+          "signin",
+          "account",
+          "password",
+          "gift",
+          "bonus",
+          "claim",
+          "banking",
+        ];
+
+        if (
+          suspiciousWords.some(function (word) {
+            return fullURL.includes(word);
+          })
+        ) {
+          reasons.push(translations[currentLanguage].keyword);
+          score += 1;
+        }
+
+        if (
+          parsedURL.port &&
+          parsedURL.port !== "80" &&
+          parsedURL.port !== "443"
+        ) {
+          reasons.push(translations[currentLanguage].port);
+          score += 1;
+        }
+
+        if (reasons.length === 1 && parsedURL.protocol === "https:") {
+          reasons.push(translations[currentLanguage].normal);
+        }
+
+        showResult(score, reasons);
+      }
+
+      function showResult(score, reasons) {
+        var resultBox = document.getElementById("resultBox");
+        var resultStatus = document.getElementById("resultStatus");
+        var resultList = document.getElementById("resultList");
+
+        resultList.innerHTML = "";
+
+        var statusText = "";
+        var statusClass = "";
+
+        if (score >= 4) {
+          statusText = translations[currentLanguage].high;
+          statusClass = "status-high";
+        } else if (score >= 2) {
+          statusText = translations[currentLanguage].medium;
+          statusClass = "status-medium";
+        } else {
+          statusText = translations[currentLanguage].low;
+          statusClass = "status-low";
+        }
+
+        resultStatus.textContent = statusText;
+        resultStatus.className = "result-status " + statusClass;
+
+        reasons.forEach(function (reason) {
+          var item = document.createElement("li");
+          item.textContent = reason;
+          resultList.appendChild(item);
+        });
+
+        var advice = document.createElement("li");
+        advice.textContent = translations[currentLanguage].advice;
+        resultList.appendChild(advice);
+
+        resultBox.classList.add("show");
+        resultBox.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+
+      document
+        .getElementById("urlForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var value = document.getElementById("urlInput").value;
+          checkURL(value);
+        });
+
+      try {
+        var savedLanguage = localStorage.getItem("cybersafe-language");
+
+        if (savedLanguage === "en") {
+          changeLanguage("en");
+        }
+      } catch (error) {}
+    </script>
+  </body>
+</html>
